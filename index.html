@@ -651,6 +651,50 @@
         .quad-btn.active.qb-nu { background: linear-gradient(135deg, #3b82f6, #2563eb); }
         .quad-btn.active.qb-nn { background: linear-gradient(135deg, #6b7280, #4b5563); }
 
+        .quad-btn.my-result { border-width: 2.5px; }
+
+        .quad-btn .my-result-tag {
+            display: block;
+            font-size: clamp(9px, 1.5vw, 11px);
+            font-weight: 800;
+            color: #fff;
+            background: var(--primary);
+            padding: 0.1rem 0.4rem;
+            border-radius: 999px;
+            margin: 0 auto 0.25rem;
+            width: fit-content;
+            letter-spacing: 0.02em;
+        }
+
+        .quad-btn .btn-score {
+            display: block;
+            font-size: clamp(10px, 1.5vw, 12px);
+            font-weight: 600;
+            opacity: 0.7;
+            margin-top: 0.2rem;
+        }
+
+        .quad-btn.active .my-result-tag {
+            background: rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        .quad-btn.active .btn-score {
+            color: rgba(255,255,255,0.85);
+        }
+
+        .my-result-badge {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            font-size: clamp(13px, 2.2vw, 15px);
+            font-weight: 700;
+            padding: 0.5rem 1.25rem;
+            border-radius: 999px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
         .detail-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -817,6 +861,9 @@
 
             .quad-selector { gap: .3rem; margin-bottom: 1.25rem; }
             .quad-btn { padding: .55rem .25rem; font-size: clamp(12px, 2.8vw, 14px); border-radius: .6rem; }
+            .quad-btn .my-result-tag { font-size: 9px; padding: 0.05rem 0.3rem; }
+            .quad-btn .btn-score { font-size: 10px; }
+            .my-result-badge { font-size: clamp(12px, 2vw, 14px); padding: 0.4rem 1rem; }
 
             .detail-grid { grid-template-columns: 1fr; gap: .85rem; }
             .detail-card { padding: 1rem; }
@@ -899,6 +946,8 @@
             .quad-badge { font-size: clamp(11px, 3vw, 16px); padding: .45rem .85rem; }
 
             .quad-btn { font-size: clamp(11px, 2.5vw, 13px); padding: .45rem .2rem; }
+            .quad-btn .my-result-tag { font-size: 8px; padding: 0.05rem 0.25rem; margin-bottom: 0.15rem; }
+            .quad-btn .btn-score { font-size: 9px; }
 
             .actions {
                 margin-left: -1rem;
@@ -1057,7 +1106,9 @@
                     <option value="30대">30대</option>
                     <option value="40대">40대</option>
                     <option value="50대">50대</option>
-                    <option value="60대 이상">60대 이상</option>
+                    <option value="60대">60대</option>
+                    <option value="70대">70대</option>
+                    <option value="80대 이상">80대 이상</option>
                 </select>
                 <div class="consent-wrap">
                     <label class="consent-lbl">
@@ -1504,16 +1555,24 @@ function showResult2() {
 
 function renderTypeDetail() {
     const quads = ['I+U+','I+U-','I-U+','I-U-'];
+    const quadCats = { 'I+U+': [1,2], 'I+U-': [1,4], 'I-U+': [3,2], 'I-U-': [3,4] };
 
     document.getElementById('quadSelector').innerHTML = quads.map(q => {
         const qi = quadInfo[q];
         const active = selectedQuad === q;
-        return `<button class="quad-btn ${active ? 'active ' + qi.badge : ''}" onclick="selectQuad('${q}')">${qi.name}</button>`;
+        const isMyResult = q === dominantQuad;
+        const myTag = isMyResult ? `<span class="my-result-tag">나의 결과</span>` : '';
+        const qScore = quadCats[q].reduce((sum, c) => sum + scores[c], 0);
+        const scoreTag = `<span class="btn-score">${qScore}점</span>`;
+        return `<button class="quad-btn ${active ? 'active ' + qi.badge : ''} ${isMyResult ? 'my-result' : ''}" onclick="selectQuad('${q}')" style="${!active && isMyResult ? `border-color:${qi.color};` : ''}">${myTag}${qi.name}${scoreTag}</button>`;
     }).join('');
 
     const qi = quadInfo[selectedQuad];
+    const isMyResult = selectedQuad === dominantQuad;
+    const myBadge = isMyResult ? `<span class="my-result-badge">★ 나의 인생태도</span>` : '';
 
     document.getElementById('typeHeader').innerHTML = `
+        ${myBadge}
         <div class="type-detail-name" style="color:${qi.color};">${qi.name}</div>
         <div class="type-detail-sub"><b>${qi.eng}</b><br>"${qi.slogan}"</div>
         <p style="margin-top:.75rem; font-size:clamp(13px,2.3vw,15px); color:#64748b; line-height:1.7;">${qi.desc}</p>
