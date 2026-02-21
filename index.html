@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>인생태도 체크리스트</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #d97706;
+            --primary-dark: #b45309;
+            --primary-light: #f59e0b;
+            --primary-bg: rgba(217, 119, 6, 0.08);
+            --primary-border: rgba(217, 119, 6, 0.2);
+            --primary-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
+            --shadow-xl: 0 16px 48px rgba(0,0,0,0.16);
+            --q-green: #10b981;
+            --q-red: #ef4444;
+            --q-blue: #3b82f6;
+            --q-gray: #6b7280;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Pretendard', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(160deg, #fffbeb 0%, #fef3c7 40%, #fde68a 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #1f2937;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
+            word-break: keep-all;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container > .card,
+        .container > .result-section {
+            margin-bottom: 0;
+        }
+
+        .container:has(#introSection:not([style*="display: none"])),
+        .container:has(#userInfoSection:not([style*="display: none"])) {
+            max-width: 900px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-radius: 1.75rem;
+            padding: clamp(1.75rem, 5vw, 3rem);
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 2rem;
+            animation: fadeUp .55s ease-out;
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { transform: translate(-50%,-50%) scale(1); }
+            50% { transform: translate(-50%,-50%) scale(1.35); }
+        }
+
+        .header { text-align: center; margin-bottom: 2.5rem; }
+
+        .header h1 {
+            font-size: clamp(28px, 6vw, 44px);
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: .75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: clamp(15px, 2.8vw, 19px);
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: .35rem .9rem;
+            border-radius: 999px;
+            font-size: clamp(11px, 1.8vw, 13px);
+            font-weight: 700;
+            color: var(--primary);
+            background: var(--primary-bg);
+            margin-bottom: .75rem;
+        }
+
+        .section-title {
+            font-size: clamp(22px, 4.5vw, 32px);
+            font-weight: 900;
+            color: var(--primary-dark);
+            margin-bottom: .4rem;
+        }
+
+        .section-sub {
+            font-size: clamp(13px, 2.4vw, 16px);
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        .divider {
+            width: clamp(70px, 14vw, 120px);
+            height: 3px;
+            margin: 1rem auto 0;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(217,119,6,0.25), rgba(245,158,11,0.4));
+        }
+
+        /* Intro */
+        .intro-box {
+            background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(217,119,6,0.08));
+            border: 2px solid var(--primary-border);
+            border-radius: 1.25rem;
+            padding: 1.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .intro-box h2 {
+            font-size: clamp(18px, 3.5vw, 22px);
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: .75rem;
+        }
+
+        .intro-box p {
+            font-size: clamp(14px, 2.4vw, 16px);
+            color: #475569;
+            line-height: 1.8;
+        }
+
+        .scale-guide {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: .5rem;
+            margin-top: 1.25rem;
+        }
+
+        .scale-item {
+            background: #fff;
+            padding: .75rem .4rem;
+            border-radius: .75rem;
+            border: 2px solid #e5e7eb;
+            text-align: center;
+            transition: all .25s;
+        }
+
+        .scale-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .scale-item .sv {
+            font-size: clamp(18px, 4vw, 24px);
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .scale-item .sl {
+            font-size: clamp(10px, 1.6vw, 13px);
+            color: #64748b;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-top: .25rem;
+        }
+
+        .info-block {
+            margin-top: 1.5rem;
+            padding: clamp(1rem, 3vw, 1.75rem);
+            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1));
+            border: 1px solid var(--primary-border);
+            display: grid;
+            gap: .8rem;
+        }
+
+        .info-title {
+            font-size: clamp(14px, 2.6vw, 17px);
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: .6rem;
+            font-size: clamp(13px, 2.3vw, 15px);
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .info-row strong {
+            color: var(--primary-dark);
+            min-width: 1.4em;
+        }
+
+        /* Quadrant preview */
+        .quadrant-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .5rem;
+            margin-top: 1.25rem;
+            max-width: 360px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .qp-item {
+            padding: .6rem .5rem;
+            border-radius: .6rem;
+            text-align: center;
+            font-size: clamp(10px, 1.5vw, 12px);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .qp-item.qp-iu { background: rgba(16,185,129,0.12); color: #059669; }
+        .qp-item.qp-nu { background: rgba(59,130,246,0.12); color: #2563eb; }
+        .qp-item.qp-in { background: rgba(239,68,68,0.12); color: #dc2626; }
+        .qp-item.qp-nn { background: rgba(107,114,128,0.12); color: #4b5563; }
+
+        /* Form */
+        .form-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            height: 48px;
+            border: 2px solid #e5e7eb;
+            border-radius: .75rem;
+            padding: 0 1rem;
+            font-size: 16px;
+            background: #fff;
+            font-family: inherit;
+            transition: all .25s;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(217,119,6,0.1);
+        }
+
+        .form-select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22none%22 viewBox=%220 0 20 20%22%3E%3Cpath stroke=%22%236b7280%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%221.5%22 d=%22M6 8l4 4 4-4%22/%3E%3C/svg%3E');
+            background-repeat: no-repeat;
+            background-position: right .75rem center;
+            background-size: 1.25em;
+        }
+
+        .radio-group {
+            width: 100%;
+            height: 48px;
+            border: 2px solid #e5e7eb;
+            border-radius: .75rem;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: #fff;
+            transition: all .25s;
+        }
+
+        .radio-group:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(217,119,6,0.1);
+        }
+
+        .radio-lbl { display: flex; align-items: center; gap: .4rem; cursor: pointer; }
+        .radio-lbl input { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
+        .radio-lbl span { font-size: clamp(14px, 2.2vw, 16px); color: #334155; }
+
+        .consent-wrap {
+            border: 2px solid #e5e7eb;
+            border-radius: .75rem;
+            padding: 1.25rem;
+            background: #fff;
+        }
+
+        .consent-lbl {
+            display: flex;
+            gap: .6rem;
+            align-items: center;
+            cursor: pointer;
+            font-size: clamp(13px, 2vw, 15px);
+            color: #475569;
+        }
+
+        .consent-lbl input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        /* Progress */
+        .progress-wrap {
+            position: sticky;
+            top: .75rem;
+            z-index: 100;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: .85rem 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: .5rem;
+        }
+
+        .progress-label { font-weight: 700; color: #374151; font-size: clamp(13px, 2.4vw, 15px); }
+        .progress-pct { font-weight: 800; color: var(--primary); font-size: clamp(15px, 2.8vw, 18px); }
+
+        .progress-track {
+            height: 10px;
+            background: #f3f4f6;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-track::after {
+            content: '';
+            display: block;
+            height: 100%;
+            width: var(--prog, 0%);
+            background: var(--primary-gradient);
+            border-radius: 999px;
+            transition: width .4s ease;
+        }
+
+        /* Questions */
+        .q-list { display: flex; flex-direction: column; gap: 1.25rem; }
+
+        .q-item {
+            background: #fff;
+            border: 2px solid #e5e7eb;
+            border-radius: 1.15rem;
+            padding: 1.25rem;
+            transition: all .25s;
+            border-left: 4px solid #e5e7eb;
+        }
+
+        .q-item:hover { border-color: var(--primary-light); box-shadow: var(--shadow-sm); border-left-color: var(--primary-light); }
+
+        .q-item.answered {
+            border-color: var(--primary);
+            border-left-color: var(--primary);
+            background: linear-gradient(135deg, rgba(245,158,11,0.04), rgba(217,119,6,0.02));
+        }
+
+        .q-head { display: flex; align-items: flex-start; gap: .75rem; margin-bottom: .85rem; }
+
+        .q-num {
+            background: var(--primary-gradient);
+            color: #fff;
+            min-width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .q-text {
+            font-size: clamp(15px, 2.8vw, 17px);
+            font-weight: 600;
+            color: #1f2937;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .q-answers { display: grid; grid-template-columns: repeat(5, 1fr); gap: .4rem; }
+
+        .q-ans {
+            padding: .7rem .3rem;
+            border: 2px solid #e5e7eb;
+            border-radius: .7rem;
+            background: #fff;
+            cursor: pointer;
+            transition: all .25s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .q-ans:hover { border-color: var(--primary); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+        .q-ans.sel {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-color: var(--primary);
+            transform: scale(1.04);
+            box-shadow: var(--shadow-md);
+        }
+
+        .q-ans .as { font-size: clamp(14px, 3.2vw, 18px); font-weight: 800; }
+        .q-ans .al { font-size: clamp(9px, 1.8vw, 12px); font-weight: 600; opacity: .85; line-height: 1.2; margin-top: .15rem; white-space: pre-line; }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary-gradient);
+            color: #fff;
+            border: none;
+            border-radius: .85rem;
+            padding: .85rem 1.75rem;
+            font-size: clamp(15px, 2.8vw, 17px);
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: all .25s;
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            font-family: inherit;
+        }
+
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .btn:active { transform: translateY(0); }
+        .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+        .btn-sec {
+            background: #f3f4f6;
+            color: #374151;
+            box-shadow: none;
+        }
+
+        .btn-sec:hover { background: #e5e7eb; box-shadow: none; }
+
+        .actions {
+            display: flex;
+            gap: .75rem;
+            justify-content: center;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+            position: sticky;
+            bottom: .75rem;
+            background: rgba(255,255,255,0.93);
+            backdrop-filter: blur(10px);
+            padding: .85rem 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+            z-index: 100;
+        }
+
+        #introSection .actions,
+        #userInfoSection .actions {
+            position: static;
+            background: transparent;
+            backdrop-filter: none;
+            padding: 0;
+            box-shadow: none;
+            margin-top: clamp(2.5rem, 5vw, 3.5rem);
+            gap: 1.25rem;
+        }
+
+        #introSection .actions .btn {
+            border-radius: 1rem;
+            padding: 1rem 2rem;
+            font-size: clamp(16px, 3vw, 18px);
+            gap: 0.5rem;
+            min-width: auto;
+            margin: 0;
+            flex: none;
+        }
+
+        /* Result sections */
+        .result-section { display: none; }
+        .result-section.active { display: block; animation: fadeUp .55s ease-out; }
+
+        .result-title {
+            font-size: clamp(26px, 5vw, 36px);
+            font-weight: 900;
+            color: var(--primary-dark);
+            text-align: center;
+            margin-bottom: .5rem;
+        }
+
+        .result-title::after {
+            content: '';
+            display: block;
+            width: 64px;
+            height: 4px;
+            border-radius: 999px;
+            margin: .5rem auto 0;
+            background: var(--primary-gradient);
+        }
+
+        /* Score cards */
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: .6rem;
+            margin: 1.75rem 0;
+        }
+
+        .score-card {
+            background: #fff;
+            border: 2px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: .85rem .5rem;
+            text-align: center;
+            transition: all .25s;
+        }
+
+        .score-card.hi {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(245,158,11,0.06), rgba(217,119,6,0.03));
+            box-shadow: var(--shadow-sm);
+        }
+
+        .score-card .sc-label {
+            font-size: clamp(10px, 1.8vw, 13px);
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: .3rem;
+            line-height: 1.3;
+        }
+
+        .score-card .sc-val {
+            font-size: clamp(20px, 4vw, 28px);
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        /* OK Corral chart */
+        .chart-wrap {
+            background: #fff;
+            border-radius: 1.25rem;
+            padding: clamp(1rem, 3vw, 2rem);
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .chart-title {
+            font-size: clamp(18px, 3.5vw, 22px);
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .chart-svg-wrap { max-width: 560px; margin: 0 auto; }
+        .chart-svg-wrap svg { width: 100%; height: auto; }
+
+        /* Quadrant badge */
+        .quad-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .4rem;
+            padding: .6rem 1.5rem;
+            border-radius: 999px;
+            font-size: clamp(14px, 3vw, 22px);
+            font-weight: 800;
+            color: #fff;
+            box-shadow: var(--shadow-md);
+            margin: 1rem auto;
+            text-align: center;
+            flex-wrap: wrap;
+            max-width: 100%;
+        }
+
+        .quad-badge.qb-iu { background: linear-gradient(135deg, #10b981, #059669); }
+        .quad-badge.qb-in { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .quad-badge.qb-nu { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .quad-badge.qb-nn { background: linear-gradient(135deg, #6b7280, #4b5563); }
+
+        /* Type detail */
+        .type-detail-header { text-align: center; margin-bottom: 1.5rem; }
+
+        .type-detail-name {
+            font-size: clamp(24px, 4.5vw, 34px);
+            font-weight: 900;
+            margin-bottom: .3rem;
+        }
+
+        .type-detail-sub {
+            font-size: clamp(14px, 2.4vw, 17px);
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        .quad-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: .4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quad-btn {
+            padding: .65rem .4rem;
+            border: 2px solid #e5e7eb;
+            border-radius: .7rem;
+            background: #fff;
+            cursor: pointer;
+            transition: all .25s;
+            text-align: center;
+            font-weight: 700;
+            font-size: clamp(11px, 1.8vw, 14px);
+            color: #475569;
+            font-family: inherit;
+            line-height: 1.3;
+        }
+
+        .quad-btn:hover { transform: translateY(-2px); }
+        .quad-btn.active { color: #fff; border-color: transparent; box-shadow: var(--shadow-sm); }
+        .quad-btn.active.qb-iu { background: linear-gradient(135deg, #10b981, #059669); }
+        .quad-btn.active.qb-in { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .quad-btn.active.qb-nu { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .quad-btn.active.qb-nn { background: linear-gradient(135deg, #6b7280, #4b5563); }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-card {
+            background: #fff;
+            border: 2px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1.25rem;
+        }
+
+        .detail-card h3 {
+            font-size: clamp(16px, 3vw, 20px);
+            font-weight: 800;
+            margin-bottom: .75rem;
+            padding-bottom: .6rem;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .detail-card ul { list-style: none; padding: 0; }
+
+        .detail-card li {
+            padding: .4rem 0 .4rem 1.5rem;
+            font-size: clamp(13px, 2.3vw, 15px);
+            color: #475569;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .detail-card li::before {
+            content: '•';
+            position: absolute;
+            left: .35rem;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        /* Strategy */
+        .strategy-wrap { max-width: 700px; margin: 0 auto; }
+
+        .strategy-item {
+            background: #fff;
+            border: 2px solid #e5e7eb;
+            border-radius: .85rem;
+            padding: 1.25rem;
+            margin-bottom: .75rem;
+            transition: all .25s;
+        }
+
+        .strategy-item:hover { border-color: var(--primary-light); box-shadow: var(--shadow-sm); }
+
+        .strategy-num { font-weight: 800; color: var(--primary); margin-bottom: .4rem; font-size: clamp(14px, 2.5vw, 16px); }
+
+        .strategy-input {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #e5e7eb;
+            padding: .5rem 0;
+            font-size: 16px;
+            color: #1f2937;
+            font-family: inherit;
+            transition: border-color .25s;
+            background: transparent;
+        }
+
+        .strategy-input:focus { outline: none; border-bottom-color: var(--primary); }
+        .strategy-input::placeholder { color: #9ca3af; }
+
+        .strategy-del {
+            margin-top: .4rem;
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 13px;
+            padding: .2rem .4rem;
+            border-radius: .4rem;
+            font-family: inherit;
+        }
+
+        .strategy-del:hover { background: rgba(239,68,68,0.08); }
+
+        /* Complete */
+        .complete-icon { font-size: clamp(56px, 12vw, 80px); margin-bottom: .75rem; text-align: center; }
+
+        .complete-msg {
+            font-size: clamp(15px, 2.6vw, 18px);
+            color: #475569;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        /* 태블릿 (769px ~ 1024px) */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .container { max-width: 90%; }
+            .detail-grid { gap: 1rem; }
+            .score-grid { gap: .5rem; }
+            .chart-svg-wrap { max-width: 480px; }
+        }
+
+        /* 모바일 (768px 이하) */
+        @media (max-width: 768px) {
+            body { padding: 1rem .5rem; }
+
+            .container:has(#introSection:not([style*="display: none"])),
+            .container:has(#userInfoSection:not([style*="display: none"])) {
+                max-width: 100%;
+            }
+
+            .card {
+                padding: 1.25rem;
+                border-radius: 1.25rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .header { margin-bottom: 1.75rem; }
+
+            .intro-box { padding: 1.25rem; }
+
+            .intro-box p br { display: none; }
+
+            .scale-guide { gap: .3rem; }
+            .scale-item { padding: .55rem .15rem; }
+            .scale-item .sv { font-size: clamp(16px, 4vw, 20px); }
+            .scale-item .sl {
+                font-size: 0;
+                color: transparent;
+                overflow: hidden;
+                line-height: 0;
+            }
+            .scale-item:nth-child(1) .sl::after { content: "매우\A그렇다"; white-space: pre-line; font-size: clamp(9px, 2.2vw, 11px); display: block; color: #64748b; line-height: 1.3; }
+            .scale-item:nth-child(2) .sl::after { content: "자주\A그렇다"; white-space: pre-line; font-size: clamp(9px, 2.2vw, 11px); display: block; color: #64748b; line-height: 1.3; }
+            .scale-item:nth-child(3) .sl::after { content: "그저\A그렇다"; white-space: pre-line; font-size: clamp(9px, 2.2vw, 11px); display: block; color: #64748b; line-height: 1.3; }
+            .scale-item:nth-child(4) .sl::after { content: "별로\A아니다"; white-space: pre-line; font-size: clamp(9px, 2.2vw, 11px); display: block; color: #64748b; line-height: 1.3; }
+            .scale-item:nth-child(5) .sl::after { content: "거의\A아니다"; white-space: pre-line; font-size: clamp(9px, 2.2vw, 11px); display: block; color: #64748b; line-height: 1.3; }
+
+            .quadrant-preview { max-width: 300px; gap: .4rem; }
+            .qp-item { font-size: clamp(9px, 2vw, 11px); padding: .5rem .3rem; }
+
+            .q-item { padding: 1rem; border-radius: 1rem; }
+            .q-head { gap: .6rem; margin-bottom: .7rem; }
+            .q-num { min-width: 28px; height: 28px; font-size: 13px; border-radius: 7px; }
+            .q-text { font-size: clamp(14px, 3.2vw, 16px); }
+
+            .q-answers { gap: .25rem; }
+            .q-ans { padding: .5rem .15rem; border-radius: .55rem; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+            .q-ans .as { font-size: clamp(13px, 3.5vw, 16px); }
+            .q-ans .al { font-size: clamp(8px, 2vw, 11px); text-align: center; }
+
+            .progress-wrap { padding: .7rem .85rem; margin-bottom: 1.25rem; }
+
+            .score-grid { gap: .35rem; margin: 1.25rem 0; }
+            .score-card { padding: .6rem .25rem; border-radius: .75rem; }
+            .score-card .sc-label { font-size: clamp(8px, 2vw, 11px); line-height: 1.2; margin-bottom: .2rem; }
+            .score-card .sc-val { font-size: clamp(18px, 4vw, 24px); }
+
+            .quad-badge { padding: .5rem 1rem; font-size: clamp(12px, 3vw, 18px); border-radius: 1rem; line-height: 1.4; }
+
+            .chart-wrap { padding: 1rem; }
+            .chart-title { font-size: clamp(16px, 3.5vw, 20px); margin-bottom: .75rem; }
+
+            .quad-selector { gap: .3rem; margin-bottom: 1.25rem; }
+            .quad-btn { padding: .55rem .25rem; font-size: clamp(12px, 2.8vw, 14px); border-radius: .6rem; }
+
+            .detail-grid { grid-template-columns: 1fr; gap: .85rem; }
+            .detail-card { padding: 1rem; }
+            .detail-card h3 { font-size: clamp(15px, 3.2vw, 18px); }
+            .detail-card li { font-size: clamp(13px, 2.6vw, 15px); padding-left: 1.4rem; }
+
+            .type-detail-name { font-size: clamp(22px, 5vw, 30px); }
+            .type-detail-sub { font-size: clamp(13px, 2.6vw, 16px); }
+
+            .result-title { font-size: clamp(22px, 5vw, 30px); }
+
+            .btn { padding: .75rem 1.25rem; font-size: clamp(14px, 3vw, 16px); }
+
+            .actions {
+                margin-top: 1.75rem;
+                flex-direction: row;
+                justify-content: space-between;
+                margin-left: -1.25rem;
+                margin-right: -1.25rem;
+                margin-bottom: -1.25rem;
+                border-radius: 0 0 1.25rem 1.25rem;
+                padding: .75rem 1rem;
+            }
+
+            #introSection .actions,
+            #userInfoSection .actions {
+                justify-content: center;
+                position: static;
+                background: transparent;
+                backdrop-filter: none;
+                box-shadow: none;
+                margin: clamp(2rem, 4vw, 3rem) 0 0 0;
+                padding: 0;
+                border-radius: 0;
+            }
+
+            #introSection .actions .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: clamp(14px, 2.5vw, 16px);
+                margin: 0;
+                flex: none;
+            }
+
+            .actions .btn { flex: 0 1 auto; min-width: 100px; justify-content: center; }
+            .actions .btn-sec { margin-right: auto; }
+            .actions .btn:not(.btn-sec) { margin-left: auto; }
+
+            .strategy-item { padding: 1rem; }
+            .strategy-input { font-size: 16px; }
+
+            .info-block { padding: 1rem; gap: .7rem; }
+            .info-row { font-size: clamp(13px, 2.6vw, 15px); }
+
+            .complete-msg { font-size: clamp(14px, 2.8vw, 17px); }
+        }
+
+        /* 소형 모바일 (480px 이하) */
+        @media (max-width: 480px) {
+            body { padding: .75rem .25rem; }
+            .card { padding: 1rem; border-radius: 1rem; }
+
+            .header h1 { font-size: clamp(24px, 7vw, 32px); }
+            .header .subtitle { font-size: clamp(13px, 3.2vw, 16px); }
+            .header { margin-bottom: 1.5rem; }
+
+            .intro-box { padding: 1rem; border-radius: 1rem; }
+
+            .scale-item { padding: .5rem .1rem; }
+            .scale-item .sv { font-size: clamp(15px, 4.5vw, 18px); }
+
+            .q-item { padding: .85rem; }
+            .q-ans { min-height: 48px; padding: .45rem .1rem; }
+            .q-ans .as { font-size: clamp(12px, 3.2vw, 15px); }
+            .q-ans .al { font-size: clamp(7px, 1.8vw, 10px); }
+            .q-num { min-width: 26px; height: 26px; font-size: 12px; }
+
+            .score-card .sc-label { font-size: clamp(7px, 1.8vw, 10px); }
+            .score-card .sc-val { font-size: clamp(16px, 4vw, 20px); }
+
+            .quad-badge { font-size: clamp(11px, 3vw, 16px); padding: .45rem .85rem; }
+
+            .quad-btn { font-size: clamp(11px, 2.5vw, 13px); padding: .45rem .2rem; }
+
+            .actions {
+                margin-left: -1rem;
+                margin-right: -1rem;
+                margin-bottom: -1rem;
+                border-radius: 0 0 1rem 1rem;
+                padding: .65rem .75rem;
+            }
+
+            #introSection .actions,
+            #userInfoSection .actions {
+                margin-left: 0;
+                margin-right: 0;
+                margin-bottom: 0;
+            }
+
+            #introSection .actions .btn {
+                margin: 0;
+                flex: none;
+            }
+
+            .actions .btn { min-width: 90px; padding: .65rem 1rem; font-size: clamp(13px, 3vw, 15px); }
+
+            .quadrant-preview { max-width: 260px; }
+            .qp-item { font-size: clamp(8px, 2.2vw, 10px); padding: .4rem .25rem; }
+
+            .detail-card li { padding-left: 1.25rem; }
+            .detail-card li::before { left: .25rem; }
+        }
+
+        /* 초소형 모바일 (360px 이하) */
+        @media (max-width: 360px) {
+            body { padding: .5rem .15rem; }
+            .card { padding: .85rem; border-radius: .85rem; }
+
+            .header h1 { font-size: 22px; margin-bottom: .5rem; }
+            .header .subtitle { font-size: 12px; }
+
+            .scale-item .sv { font-size: 14px; }
+
+            .q-ans { min-height: 44px; }
+            .q-ans .as { font-size: 11px; }
+            .q-ans .al { font-size: 7px; }
+
+            .score-card { padding: .5rem .2rem; }
+
+            .quad-badge { font-size: 11px; padding: .4rem .7rem; }
+
+            .actions {
+                margin-left: -.85rem;
+                margin-right: -.85rem;
+                margin-bottom: -.85rem;
+                border-radius: 0 0 .85rem .85rem;
+                padding: .6rem .65rem;
+            }
+
+            #introSection .actions,
+            #userInfoSection .actions {
+                margin-left: 0;
+                margin-right: 0;
+                margin-bottom: 0;
+            }
+
+            #introSection .actions .btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 14px;
+                border-radius: 0.75rem;
+                margin: 0;
+                flex: none;
+            }
+
+            .actions .btn { min-width: 80px; padding: .6rem .85rem; font-size: 13px; }
+
+            .btn { border-radius: .65rem; }
+        }
+
+        /* 가로 모드 (landscape) 작은 화면 */
+        @media (max-height: 500px) and (orientation: landscape) {
+            body { padding: .5rem; }
+            .card { padding: 1rem; }
+            .header { margin-bottom: 1rem; }
+            .header h1 { font-size: 24px; }
+
+            .container:has(#introSection:not([style*="display: none"])),
+            .container:has(#userInfoSection:not([style*="display: none"])) {
+                min-height: auto;
+            }
+
+            .scale-guide { gap: .25rem; }
+            .quadrant-preview { max-width: 240px; }
+            .info-block { margin-top: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+
+        <!-- 인트로 -->
+        <div id="introSection" class="card">
+            <div class="header">
+                <h1>인생태도 체크리스트</h1>
+                <p class="subtitle">교류분석(TA) 이론에 기반한 나의 인생태도 알아보기</p>
+            </div>
+
+            <div class="intro-box" style="text-align:center;">
+                <h2 style="justify-content:center;">검사 안내</h2>
+                <p>다음 각 문항에 대해 아래 기준에 따라 점수를 기록하십시오.<br>
+                   총 48문항으로, 솔직하게 응답할수록 정확한 결과를 얻을 수 있습니다.</p>
+
+                <div class="scale-guide">
+                    <div class="scale-item"><div class="sv">5</div><div class="sl">매우 그렇다</div></div>
+                    <div class="scale-item"><div class="sv">4</div><div class="sl">자주 그렇다</div></div>
+                    <div class="scale-item"><div class="sv">3</div><div class="sl">그저 그렇다</div></div>
+                    <div class="scale-item"><div class="sv">2</div><div class="sl">별로 그렇지 않다</div></div>
+                    <div class="scale-item"><div class="sv">1</div><div class="sl">거의 그렇지 않은 편이다</div></div>
+                </div>
+
+                <div class="quadrant-preview">
+                    <div class="qp-item qp-nu">I'm Not OK<br>You're OK</div>
+                    <div class="qp-item qp-iu">I'm OK<br>You're OK</div>
+                    <div class="qp-item qp-nn">I'm Not OK<br>You're Not OK</div>
+                    <div class="qp-item qp-in">I'm OK<br>You're Not OK</div>
+                </div>
+            </div>
+
+            <div class="info-block">
+                <div class="info-title">검사 전 안내사항</div>
+                <div class="info-row"><strong>1.</strong><span>총 <b>48문항</b>이며, 소요시간은 약 <b>10~15분</b>입니다.</span></div>
+                <div class="info-row"><strong>2.</strong><span>정답은 없으므로 <b>솔직하게</b> 응답해 주세요.</span></div>
+                <div class="info-row"><strong>3.</strong><span>결과는 4가지 인생태도 유형으로 나타납니다.</span></div>
+            </div>
+
+            <div class="actions">
+                <button class="btn" onclick="showUserInfo()">검사 시작하기 →</button>
+            </div>
+        </div>
+
+        <!-- 사용자 정보 -->
+        <div id="userInfoSection" class="card" style="display:none;">
+            <div style="text-align:center; margin-bottom:1.5rem;">
+                <div class="section-tag">STEP 1</div>
+                <div class="section-title">기본 정보 입력</div>
+                <div class="section-sub">검사 시작 전 기본 정보를 입력해 주세요.</div>
+                <div class="divider"></div>
+            </div>
+
+            <div class="form-grid">
+                <div class="radio-group">
+                    <label class="radio-lbl"><input type="radio" name="u-gender" value="남"><span>남</span></label>
+                    <label class="radio-lbl"><input type="radio" name="u-gender" value="여"><span>여</span></label>
+                </div>
+                <select id="u-age" class="form-select">
+                    <option value="">연령대를 선택하세요</option>
+                    <option value="10대">10대</option>
+                    <option value="20대">20대</option>
+                    <option value="30대">30대</option>
+                    <option value="40대">40대</option>
+                    <option value="50대">50대</option>
+                    <option value="60대 이상">60대 이상</option>
+                </select>
+                <div class="consent-wrap">
+                    <label class="consent-lbl">
+                        <input type="checkbox" id="u-consent">
+                        개인정보 수집 및 이용에 동의합니다
+                    </label>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-sec" onclick="showIntro()">← 이전</button>
+                <button class="btn" onclick="startTest()">검사 시작 →</button>
+            </div>
+        </div>
+
+        <!-- 검사 -->
+        <div id="testSection" class="card" style="display:none;">
+            <div class="header">
+                <h1>인생태도 체크리스트</h1>
+                <p class="subtitle">각 문항을 읽고 자신에게 해당하는 정도를 선택하세요</p>
+            </div>
+
+            <div class="progress-wrap">
+                <div class="progress-top">
+                    <span class="progress-label">진행률</span>
+                    <span class="progress-pct" id="progPct">0%</span>
+                </div>
+                <div class="progress-track" id="progBar"></div>
+            </div>
+
+            <div class="q-list" id="qList"></div>
+
+            <div class="actions">
+                <button class="btn btn-sec" onclick="backToUserInfo()">← 이전</button>
+                <button class="btn" id="resultBtn" onclick="showResult1()" disabled>결과 보기 →</button>
+            </div>
+        </div>
+
+        <!-- 결과 1: 점수 + 차트 -->
+        <div id="result1" class="result-section">
+            <div class="card">
+                <div class="result-title">나의 인생태도 결과</div>
+                <div style="text-align:center;" id="quadBadge"></div>
+                <div class="score-grid" id="scoreGrid"></div>
+
+                <div class="chart-wrap">
+                    <div class="chart-title">인생태도 체크리스트 결과표</div>
+                    <div class="chart-svg-wrap" id="chartArea"></div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-sec" onclick="backToTest()">← 검사로 돌아가기</button>
+                    <button class="btn" onclick="showResult2()">상세 보기 →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 2: 유형 상세 -->
+        <div id="result2" class="result-section">
+            <div class="card">
+                <div class="result-title">인생태도 유형 상세</div>
+                <div class="quad-selector" id="quadSelector"></div>
+                <div class="type-detail-header" id="typeHeader"></div>
+                <div class="detail-grid" id="typeContent"></div>
+
+                <div class="actions">
+                    <button class="btn btn-sec" onclick="showResult1()">← 이전</button>
+                    <button class="btn" onclick="showResult3()">실천 방안 →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 3: 실천 방안 -->
+        <div id="result3" class="result-section">
+            <div class="card">
+                <div class="result-title">행복한 소통을 위한 나의 실천 방안</div>
+                <p style="text-align:center; color:#64748b; margin:1rem 0 2rem; font-size:clamp(13px,2.4vw,15px);">
+                    검사 결과를 바탕으로 실천할 수 있는 구체적인 방안을 작성해 보세요.
+                </p>
+                <div class="strategy-wrap">
+                    <div id="strategyList"></div>
+                    <div style="text-align:center; margin-top:1rem;">
+                        <button class="btn btn-sec" onclick="addStrategy()" style="width:100%; justify-content:center;">+ 방안 추가하기</button>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-sec" onclick="showResult2()">← 이전</button>
+                    <button class="btn" onclick="showResult4()">제출하기 →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 4: 완료 -->
+        <div id="result4" class="result-section">
+            <div class="card">
+                <div class="complete-icon">🎉</div>
+                <div class="result-title">수고하셨습니다!</div>
+                <div class="complete-msg" style="margin-top:1.5rem;">
+                    인생태도 체크리스트를 완료해 주셔서 감사합니다.<br>
+                    결과를 참고하여 더 건강한 인생태도를 만들어 가시길 응원합니다.
+                </div>
+
+                <div class="info-block" style="margin-top:2rem;">
+                    <div class="info-title">검사 관련 추가 정보</div>
+                    <div class="info-row"><strong>1.</strong><div>유튜브 <b>'이재경교수TV'</b>, 길벗심리상담연구소 홈페이지에서 더 많은 자료를 확인해 보세요.</div></div>
+                    <div class="info-row"><strong>2.</strong><div>교육(강의) 및 심리 상담 문의: <b style="color:var(--primary-dark);">ljg4129@naver.com</b></div></div>
+                </div>
+
+                <div class="actions" style="position:static; background:transparent; box-shadow:none; backdrop-filter:none;">
+                    <button class="btn btn-sec" onclick="showResult3()">← 이전</button>
+                    <button class="btn" onclick="resetAll()">처음으로</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+const questions = [
+    { id:1,  text:"남의 말을 곧이곧대로 잘 믿는다.", cat:2 },
+    { id:2,  text:"자신의 생활에 충실하다.", cat:3 },
+    { id:3,  text:"다른 사람에게 \"당신과 있으면 안심이야\"라는 소리를 자주 듣는다.", cat:2 },
+    { id:4,  text:"개인적인 비밀을 남에게 거의 얘기하지 않는다.", cat:1 },
+    { id:5,  text:"남의 얘기에 상처를 잘 받는다.", cat:4 },
+    { id:6,  text:"상대의 무신경함에 화내는 일이 자주 있다.", cat:1 },
+    { id:7,  text:"자신의 실수를 별로 마음에 담아두지 않는다.", cat:3 },
+    { id:8,  text:"지금의 친구들보다 더 좋은 사람이 반드시 있다고 생각한다.", cat:1 },
+    { id:9,  text:"\"내게는 그럴 만한 능력이 없어\" 하고 포기하는 경우가 많다.", cat:4 },
+    { id:10, text:"자신의 패션감각에 자신이 있다.", cat:3 },
+    { id:11, text:"상대가 얘기하는 것을 잘 듣는다.", cat:2 },
+    { id:12, text:"남이 호의를 베풀어도 달갑지 않게 느끼는 일이 자주 있다.", cat:1 },
+    { id:13, text:"자신에게는 아직 감춰진 재능이 있다고 생각한다.", cat:3 },
+    { id:14, text:"누군가가 나에게 뭔가 해주는 것을 좋아한다.", cat:4 },
+    { id:15, text:"자신을 매력적인 사람이라고 생각한다.", cat:3 },
+    { id:16, text:"자신이 먼저 다른 사람에게 접근하는 일은 거의 없다.", cat:1 },
+    { id:17, text:"다툼이 생기면 다른 사람의 탓으로 돌려버리는 일이 많은 편이다.", cat:1 },
+    { id:18, text:"기뻐하는 사람을 보면 자신의 기분까지 좋아진다.", cat:2 },
+    { id:19, text:"무슨 일이든 '하면 된다'고 생각한다.", cat:3 },
+    { id:20, text:"'그 사람과 같이 있어 다행이야'라고 느끼는 일이 많다.", cat:2 },
+    { id:21, text:"남과 함께 일을 하면 잘 되는 일이 많다.", cat:2 },
+    { id:22, text:"'내 호의가 상대를 불편하게 하는 것은 아닐까?'하고 걱정을 한다.", cat:4 },
+    { id:23, text:"좋아하는 사람에게는 자신이 먼저 접근해 간다.", cat:3 },
+    { id:24, text:"상대의 장점을 잘 찾아내는 편이다.", cat:2 },
+    { id:25, text:"상대의 결점이 하나라도 눈에 띄면 그 사람 전체가 싫어진다.", cat:1 },
+    { id:26, text:"남에게 비판을 받으면 아무 말도 못한다.", cat:4 },
+    { id:27, text:"나는 다른 사람을 진심으로 좋아하는 편이다.", cat:2 },
+    { id:28, text:"\"내가 왜 이런 짓을 했을까?\" 하고 후회하는 적이 많다.", cat:4 },
+    { id:29, text:"무엇을 해도 잘 해내지 못하는 사람이 많다고 생각한다.", cat:1 },
+    { id:30, text:"자신의 말과 행동에 자신감을 갖지 못한다.", cat:4 },
+    { id:31, text:"자신이 하고 싶어도 주위사람이 싫어하면 곧잘 참아버린다.", cat:4 },
+    { id:32, text:"다른 사람의 실수나 실패에 대해 별로 초조해 하지 않는다.", cat:2 },
+    { id:33, text:"기분 나쁜 일이 있어도 금방 기분전환을 할 수 있다.", cat:3 },
+    { id:34, text:"앞으로도 즐거운 일이 많이 있을 것이라고 생각한다.", cat:3 },
+    { id:35, text:"자신의 사고방식과 틀린 사람과도 잘 지낼 수 있다.", cat:2 },
+    { id:36, text:"남과 비교해 자신은 부족한 것이 많다고 느끼는 일이 자주 있다.", cat:4 },
+    { id:37, text:"자신의 취향과 틀린 사람과는 사귀고 싶지 않다.", cat:1 },
+    { id:38, text:"자신이 느낀 것에 대해 얘기하는 편이다.", cat:3 },
+    { id:39, text:"싸움을 하더라도 화해의 실마리를 스스로 잘 찾는다.", cat:2 },
+    { id:40, text:"남에게 폐를 끼치거나 제멋대로 말하는 것에 대해 별로 신경 쓰지 않는다.", cat:1 },
+    { id:41, text:"다른 사람이 관심을 갖고 있는 일을 많이 하는 편이다.", cat:2 },
+    { id:42, text:"귀찮은 일에는 가급적 관여하지 않는다.", cat:1 },
+    { id:43, text:"자신의 생활방식에 대해 만족한다.", cat:3 },
+    { id:44, text:"'친구와의 우정이란 이런 것이야'라고 딱 잘라 결론을 낼 수 있다.", cat:1 },
+    { id:45, text:"참된 자기를 드러내면 다른 사람들이 자신을 싫어할 것 같은 느낌이 든다.", cat:4 },
+    { id:46, text:"상대의 싫은 면이 있더라도 사귈 수 있다.", cat:2 },
+    { id:47, text:"'나는 참 열심히 노력하고 있는데...'라는 생각을 자주 한다.", cat:4 },
+    { id:48, text:"무엇을 해도 뜻대로 안 된다는 느낌이 든다.", cat:4 }
+];
+
+const ansOpts = [
+    { score:5, label:"매우 그렇다",           labelM:"매우\n그렇다" },
+    { score:4, label:"자주 그렇다",           labelM:"자주\n그렇다" },
+    { score:3, label:"그저 그렇다",           labelM:"그저\n그렇다" },
+    { score:2, label:"별로 그렇지 않다",      labelM:"별로\n그렇지 않다" },
+    { score:1, label:"거의 그렇지 않은 편이다", labelM:"거의\n아니다" }
+];
+
+const catLabels = {
+    1: { axis:"①", name:"You're Not OK", kor:"타인부정(U-)" },
+    2: { axis:"②", name:"You're OK",     kor:"타인긍정(U+)" },
+    3: { axis:"③", name:"I'm OK",        kor:"자기긍정(I+)" },
+    4: { axis:"④", name:"I'm Not OK",    kor:"자기부정(I-)" }
+};
+
+const quadInfo = {
+    "I+U+": {
+        key:"I+U+", name:"협력형", eng:"I'm OK, You're OK",
+        badge:"qb-iu", color:"#10b981",
+        slogan:"나도 괜찮고, 당신도 괜찮아",
+        desc:"자신과 타인을 동등하게 존중하고 신뢰하는 건강한 인생태도입니다. 문제가 생겨도 함께 협력하여 해결하며, Win-Win 관계를 추구합니다.",
+        traits:["자신과 타인을 동등하게 존중하고 신뢰한다","문제 발생 시 협력적으로 해결방안을 모색한다","개방적이고 진솔한 의사소통을 한다","건강한 자존감을 바탕으로 성숙한 관계를 형성한다","갈등 상황에서도 대화를 통한 해결을 추구한다","상대의 의견을 경청하고 공감한다"],
+        comm:["경청과 공감 기반의 대화","진솔한 자기 표현","상호 존중하는 소통","건설적인 피드백 주고받기"],
+        growth:["이 건강한 태도를 꾸준히 유지하고 강화하기","스트레스 상황에서도 OK-OK 태도를 유지하기","주변 사람들의 긍정적 태도를 격려하기","자기 성장과 타인 배려의 균형 유지하기"]
+    },
+    "I+U-": {
+        key:"I+U-", name:"지배형", eng:"I'm OK, You're Not OK",
+        badge:"qb-in", color:"#ef4444",
+        slogan:"나는 괜찮은데, 당신이 문제야",
+        desc:"자신은 긍정하지만 타인을 부정하는 독선적이고 지배적인 인생태도입니다. 비판적이고 판단적인 태도로 타인을 통제하려는 경향이 있습니다.",
+        traits:["타인의 단점과 실수에 민감하게 반응한다","비판적이고 판단적인 태도를 보인다","자신의 기준으로 타인을 평가하고 통제한다","타인을 무시하거나 깎아내리는 경향이 있다","자기 주장이 강하고 일방적이다","다툼 시 상대방 탓을 하는 경우가 많다"],
+        comm:["일방적인 의사전달과 지시","비난과 비판 중심의 소통","상대의 의견을 잘 수용하지 않음","권위적이고 통제적인 대화"],
+        growth:["타인의 장점을 의식적으로 찾는 연습하기","비판하기 전에 먼저 경청하기","상대의 입장에서 생각해보기","완벽주의적 기준을 완화하고 관용적 태도 키우기"]
+    },
+    "I-U+": {
+        key:"I-U+", name:"위축형", eng:"I'm Not OK, You're OK",
+        badge:"qb-nu", color:"#3b82f6",
+        slogan:"나는 부족해, 당신은 대단해",
+        desc:"자신을 부정하고 타인을 긍정하는 위축적이고 순응적인 인생태도입니다. 자기비하와 열등감으로 타인의 승인에 의존하는 경향이 있습니다.",
+        traits:["자기비하와 열등감을 자주 느낀다","타인의 승인과 인정에 의존한다","거절하지 못하고 순응하는 성향이다","자기 의견 표현이 어렵다","타인의 평가에 과도하게 민감하다","자신의 감정이나 욕구를 억제한다"],
+        comm:["소극적이고 위축된 표현","눈치 보기와 자기 의견 억제","타인에게 맞추려는 대화","자기 표현보다 순응을 선택"],
+        growth:["자신의 강점과 가치를 인정하기","작은 것부터 자기 의견 표현하기","필요할 때 '아니오'라고 말하는 연습하기","자기 자신을 있는 그대로 수용하기"]
+    },
+    "I-U-": {
+        key:"I-U-", name:"무력형", eng:"I'm Not OK, You're Not OK",
+        badge:"qb-nn", color:"#6b7280",
+        slogan:"나도 안 되고, 당신도 안 돼",
+        desc:"자신과 타인 모두를 부정하는 무력적이고 절망적인 인생태도입니다. 삶에 대한 체념과 무기력함으로 관계를 회피하는 경향이 있습니다.",
+        traits:["무기력하고 의욕이 없다","자신과 타인 모두를 불신한다","삶에 대한 체념과 냉소적 태도를 보인다","관계를 회피하고 단절하는 경향이 있다","미래에 대한 희망이 부족하다","노력해도 달라지지 않는다고 느낀다"],
+        comm:["회피적이고 단절적인 소통","무관심하거나 냉소적 태도","관계 자체를 기피","감정 표현을 거의 하지 않음"],
+        growth:["작은 성공 경험을 의식적으로 만들기","신뢰할 수 있는 한 사람과 관계 쌓기","전문가 상담을 적극 고려하기","하루 한 가지 긍정적 경험에 집중하기"]
+    }
+};
+
+let answers = {};
+let userInfo = { gender:'', age:'', consent:false };
+let scores = { 1:0, 2:0, 3:0, 4:0 };
+let dominantQuad = '';
+let selectedQuad = '';
+let strategies = ['','',''];
+
+function hideAll() {
+    ['introSection','userInfoSection','testSection'].forEach(id => {
+        document.getElementById(id).style.display = 'none';
+    });
+    ['result1','result2','result3','result4'].forEach(id => {
+        document.getElementById(id).classList.remove('active');
+    });
+}
+
+function showIntro() {
+    hideAll();
+    document.getElementById('introSection').style.display = 'block';
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function showUserInfo() {
+    hideAll();
+    document.getElementById('userInfoSection').style.display = 'block';
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function startTest() {
+    const g = document.querySelector('input[name="u-gender"]:checked');
+    const a = document.getElementById('u-age').value;
+    const c = document.getElementById('u-consent').checked;
+    if (!g) { alert('성별을 선택해 주세요.'); return; }
+    if (!a) { alert('연령대를 선택해 주세요.'); return; }
+    if (!c) { alert('개인정보 수집에 동의해 주세요.'); return; }
+    userInfo = { gender:g.value, age:a, consent:c };
+    hideAll();
+    document.getElementById('testSection').style.display = 'block';
+    renderQuestions();
+    updateProgress();
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function backToUserInfo() {
+    hideAll();
+    document.getElementById('userInfoSection').style.display = 'block';
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function backToTest() {
+    hideAll();
+    document.getElementById('testSection').style.display = 'block';
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function renderQuestions() {
+    const wrap = document.getElementById('qList');
+    const mob = window.innerWidth <= 768;
+    wrap.innerHTML = questions.map((q, i) => {
+        const sel = answers[i];
+        return `<div class="q-item ${sel !== undefined ? 'answered' : ''}" id="qi-${i}">
+            <div class="q-head">
+                <div class="q-num">${q.id}</div>
+                <div class="q-text">${q.text}</div>
+            </div>
+            <div class="q-answers">
+                ${ansOpts.map(o => {
+                    const lbl = mob ? o.labelM : o.label;
+                    return `<div class="q-ans ${sel === o.score ? 'sel' : ''}" onclick="pickAnswer(${i},${o.score})">
+                        <div class="as">${o.score}</div>
+                        <div class="al">${lbl}</div>
+                    </div>`;
+                }).join('')}
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function pickAnswer(idx, score) {
+    answers[idx] = score;
+    renderQuestions();
+    updateProgress();
+}
+
+function updateProgress() {
+    const cnt = Object.keys(answers).length;
+    const pct = Math.round((cnt / questions.length) * 100);
+    document.getElementById('progPct').textContent = pct + '%';
+    document.getElementById('progBar').style.setProperty('--prog', pct + '%');
+    document.getElementById('resultBtn').disabled = cnt === 0;
+}
+
+function calcScores() {
+    const s = { 1:0, 2:0, 3:0, 4:0 };
+    questions.forEach((q, i) => {
+        if (answers[i] !== undefined) s[q.cat] += answers[i];
+    });
+    return s;
+}
+
+function getQuadrant(s) {
+    const netX = s[3] - s[4];
+    const netY = s[2] - s[1];
+    if (netX >= 0 && netY >= 0) return 'I+U+';
+    if (netX >= 0 && netY < 0) return 'I+U-';
+    if (netX < 0 && netY >= 0) return 'I-U+';
+    return 'I-U-';
+}
+
+function showResult1() {
+    scores = calcScores();
+    dominantQuad = getQuadrant(scores);
+    selectedQuad = dominantQuad;
+    hideAll();
+    document.getElementById('result1').classList.add('active');
+
+    const qi = quadInfo[dominantQuad];
+    document.getElementById('quadBadge').innerHTML =
+        `<div class="quad-badge ${qi.badge}">${qi.name}<span style="opacity:.7;font-size:.8em;margin:0 .2em;">—</span>${qi.eng}</div>`;
+
+    document.getElementById('scoreGrid').innerHTML = [1,2,3,4].map(c => {
+        const maxCat = [1,2,3,4].reduce((a,b) => scores[a] >= scores[b] ? a : b, 1);
+        const cl = catLabels[c];
+        return `<div class="score-card ${c === maxCat ? 'hi' : ''}">
+            <div class="sc-label">${cl.axis}<br>${cl.kor}</div>
+            <div class="sc-val">${scores[c]}</div>
+        </div>`;
+    }).join('');
+
+    renderChart(scores);
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function renderChart(s) {
+    const W = 560, H = 560;
+    const cx = W/2, cy = H/2;
+    const maxVal = 60;
+    const scale = 200 / maxVal;
+
+    const pts = {
+        up:    { x: cx,                y: cy - s[2]*scale },
+        down:  { x: cx,                y: cy + s[1]*scale },
+        right: { x: cx + s[3]*scale,   y: cy },
+        left:  { x: cx - s[4]*scale,   y: cy }
+    };
+
+    const netX = cx + (s[3] - s[4]) * scale / 2;
+    const netY = cy - (s[2] - s[1]) * scale / 2;
+
+    const gridLines = [10,20,30,40,50,60];
+
+    let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit;">`;
+
+    svg += `<rect x="${cx}" y="20" width="${W/2-20}" height="${cy-20}" fill="rgba(16,185,129,0.04)" rx="4"/>`;
+    svg += `<rect x="20" y="20" width="${cx-20}" height="${cy-20}" fill="rgba(59,130,246,0.04)" rx="4"/>`;
+    svg += `<rect x="${cx}" y="${cy}" width="${W/2-20}" height="${H/2-20}" fill="rgba(239,68,68,0.04)" rx="4"/>`;
+    svg += `<rect x="20" y="${cy}" width="${cx-20}" height="${H/2-20}" fill="rgba(107,114,128,0.04)" rx="4"/>`;
+
+    gridLines.forEach(v => {
+        const d = v * scale;
+        const op = v % 20 === 0 ? 0.15 : 0.08;
+        svg += `<line x1="${cx+d}" y1="20" x2="${cx+d}" y2="${H-20}" stroke="#94a3b8" stroke-width="0.5" opacity="${op}"/>`;
+        svg += `<line x1="${cx-d}" y1="20" x2="${cx-d}" y2="${H-20}" stroke="#94a3b8" stroke-width="0.5" opacity="${op}"/>`;
+        svg += `<line x1="20" y1="${cy-d}" x2="${W-20}" y2="${cy-d}" stroke="#94a3b8" stroke-width="0.5" opacity="${op}"/>`;
+        svg += `<line x1="20" y1="${cy+d}" x2="${W-20}" y2="${cy+d}" stroke="#94a3b8" stroke-width="0.5" opacity="${op}"/>`;
+    });
+
+    svg += `<line x1="20" y1="${cy}" x2="${W-20}" y2="${cy}" stroke="#334155" stroke-width="2"/>`;
+    svg += `<line x1="${cx}" y1="20" x2="${cx}" y2="${H-20}" stroke="#334155" stroke-width="2"/>`;
+
+    [10,20,30,40,50,60].forEach(v => {
+        const d = v * scale;
+        if (v % 10 === 0) {
+            svg += `<text x="${cx+d}" y="${cy+16}" text-anchor="middle" font-size="10" fill="#94a3b8">${v}</text>`;
+            svg += `<text x="${cx-d}" y="${cy+16}" text-anchor="middle" font-size="10" fill="#94a3b8">${v}</text>`;
+            svg += `<text x="${cx+14}" y="${cy-d+4}" text-anchor="start" font-size="10" fill="#94a3b8">${v}</text>`;
+            svg += `<text x="${cx+14}" y="${cy+d+4}" text-anchor="start" font-size="10" fill="#94a3b8">${v}</text>`;
+        }
+    });
+
+    const diamond = `M ${pts.up.x} ${pts.up.y} L ${pts.right.x} ${pts.right.y} L ${pts.down.x} ${pts.down.y} L ${pts.left.x} ${pts.left.y} Z`;
+    svg += `<path d="${diamond}" fill="rgba(217,119,6,0.12)" stroke="#d97706" stroke-width="2.5" stroke-linejoin="round"/>`;
+
+    [{p:pts.up, s:s[2], c:'#10b981'}, {p:pts.down, s:s[1], c:'#ef4444'}, {p:pts.right, s:s[3], c:'#d97706'}, {p:pts.left, s:s[4], c:'#6b7280'}].forEach(item => {
+        svg += `<circle cx="${item.p.x}" cy="${item.p.y}" r="7" fill="${item.c}" stroke="#fff" stroke-width="2.5"/>`;
+        const offY = item.p.y < cy ? -14 : 18;
+        const offX = item.p.x < cx ? -12 : (item.p.x > cx ? 12 : 0);
+        const anc = item.p.x < cx ? 'end' : (item.p.x > cx ? 'start' : 'middle');
+        const ty = Math.abs(item.p.y - cy) < 5 ? item.p.y - 14 : item.p.y + offY;
+        const tx = Math.abs(item.p.x - cx) < 5 ? item.p.x : item.p.x + offX;
+        svg += `<text x="${tx}" y="${ty}" text-anchor="${anc}" font-size="13" font-weight="800" fill="${item.c}">${item.s}</text>`;
+    });
+
+    svg += `<circle cx="${netX}" cy="${netY}" r="6" fill="#d97706" stroke="#fff" stroke-width="2" style="animation:pulseDot 1.5s ease infinite;transform-origin:${netX}px ${netY}px"/>`;
+
+    svg += `<text x="${cx}" y="16" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">You're OK</text>`;
+    svg += `<text x="${cx}" y="${H-6}" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">You're Not OK</text>`;
+    svg += `<text x="${W-8}" y="${cy-8}" text-anchor="end" font-size="13" font-weight="700" fill="#334155">I'm OK</text>`;
+    svg += `<text x="12" y="${cy-8}" text-anchor="start" font-size="13" font-weight="700" fill="#334155">I'm Not OK</text>`;
+
+    svg += `<text x="${cx}" y="30" text-anchor="middle" font-size="11" fill="#64748b">②</text>`;
+    svg += `<text x="${cx}" y="${H-18}" text-anchor="middle" font-size="11" fill="#64748b">①</text>`;
+    svg += `<text x="${W-12}" y="${cy+4}" text-anchor="end" font-size="11" fill="#64748b">③</text>`;
+    svg += `<text x="16" y="${cy+4}" text-anchor="start" font-size="11" fill="#64748b">④</text>`;
+
+    svg += `<text x="${cx+100}" y="52" text-anchor="middle" font-size="10" fill="#10b981" font-weight="600">협력형</text>`;
+    svg += `<text x="${cx-100}" y="52" text-anchor="middle" font-size="10" fill="#3b82f6" font-weight="600">위축형</text>`;
+    svg += `<text x="${cx+100}" y="${H-40}" text-anchor="middle" font-size="10" fill="#ef4444" font-weight="600">지배형</text>`;
+    svg += `<text x="${cx-100}" y="${H-40}" text-anchor="middle" font-size="10" fill="#6b7280" font-weight="600">무력형</text>`;
+
+    svg += '</svg>';
+    document.getElementById('chartArea').innerHTML = svg;
+}
+
+function showResult2() {
+    hideAll();
+    document.getElementById('result2').classList.add('active');
+    renderTypeDetail();
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function renderTypeDetail() {
+    const quads = ['I+U+','I+U-','I-U+','I-U-'];
+
+    document.getElementById('quadSelector').innerHTML = quads.map(q => {
+        const qi = quadInfo[q];
+        const active = selectedQuad === q;
+        return `<button class="quad-btn ${active ? 'active ' + qi.badge : ''}" onclick="selectQuad('${q}')">${qi.name}</button>`;
+    }).join('');
+
+    const qi = quadInfo[selectedQuad];
+
+    document.getElementById('typeHeader').innerHTML = `
+        <div class="type-detail-name" style="color:${qi.color};">${qi.name}</div>
+        <div class="type-detail-sub"><b>${qi.eng}</b><br>"${qi.slogan}"</div>
+        <p style="margin-top:.75rem; font-size:clamp(13px,2.3vw,15px); color:#64748b; line-height:1.7;">${qi.desc}</p>
+    `;
+
+    document.getElementById('typeContent').innerHTML = `
+        <div class="detail-card">
+            <h3 style="color:${qi.color}; border-bottom-color:${qi.color}20;">주요 특징</h3>
+            <ul>${qi.traits.map(t => `<li>${t}</li>`).join('')}</ul>
+        </div>
+        <div class="detail-card">
+            <h3 style="color:${qi.color}; border-bottom-color:${qi.color}20;">소통 스타일</h3>
+            <ul>${qi.comm.map(t => `<li>${t}</li>`).join('')}</ul>
+            <h3 style="color:${qi.color}; border-bottom-color:${qi.color}20; margin-top:1.25rem;">성장 포인트</h3>
+            <ul>${qi.growth.map(t => `<li>${t}</li>`).join('')}</ul>
+        </div>
+    `;
+}
+
+function selectQuad(q) {
+    selectedQuad = q;
+    renderTypeDetail();
+}
+
+function showResult3() {
+    hideAll();
+    document.getElementById('result3').classList.add('active');
+    renderStrategies();
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function renderStrategies() {
+    document.getElementById('strategyList').innerHTML = strategies.map((s, i) => `
+        <div class="strategy-item">
+            <div class="strategy-num">실천 방안 ${i+1}</div>
+            <input type="text" class="strategy-input" placeholder="구체적인 실천 방안을 입력하세요" value="${s}" onchange="strategies[${i}]=this.value">
+            ${i >= 3 ? `<button class="strategy-del" onclick="removeStrategy(${i})">삭제</button>` : ''}
+        </div>
+    `).join('');
+}
+
+function addStrategy() { strategies.push(''); renderStrategies(); }
+
+function removeStrategy(i) {
+    if (strategies.length > 1) { strategies.splice(i, 1); renderStrategies(); }
+}
+
+function showResult4() {
+    hideAll();
+    document.getElementById('result4').classList.add('active');
+    sendToSheet();
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+const SHEET_URL = '';
+
+function sendToSheet() {
+    if (!SHEET_URL) return;
+    const qi = quadInfo[dominantQuad];
+    const strat = strategies.filter(s => s.trim()).join(' / ');
+    const data = {
+        gender: userInfo.gender,
+        age: userInfo.age,
+        score1: scores[1],
+        score2: scores[2],
+        score3: scores[3],
+        score4: scores[4],
+        resultType: qi.name + ' (' + qi.eng + ')',
+        strategy: strat
+    };
+    fetch(SHEET_URL, {
+        method:'POST', mode:'no-cors',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+    }).then(() => console.log('저장 완료')).catch(e => console.error('저장 오류:', e));
+}
+
+function resetAll() {
+    answers = {};
+    strategies = ['','',''];
+    scores = { 1:0, 2:0, 3:0, 4:0 };
+    dominantQuad = '';
+    selectedQuad = '';
+    userInfo = { gender:'', age:'', consent:false };
+    const ageEl = document.getElementById('u-age');
+    const conEl = document.getElementById('u-consent');
+    document.querySelectorAll('input[name="u-gender"]').forEach(el => el.checked = false);
+    if (ageEl) ageEl.value = '';
+    if (conEl) conEl.checked = false;
+    showIntro();
+}
+</script>
+</body>
+</html>
