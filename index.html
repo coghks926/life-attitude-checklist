@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>인생태도 체크리스트</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,6 +26,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Pretendard', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 16px;
             background: linear-gradient(160deg, #fffbeb 0%, #fef3c7 40%, #fde68a 100%);
             background-attachment: fixed;
             min-height: 100vh;
@@ -37,6 +38,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
         }
 
         .container {
@@ -142,14 +145,14 @@
         }
 
         .intro-box h2 {
-            font-size: clamp(20px, 4vw, 24px);
+            font-size: clamp(21px, 4vw, 25px);
             font-weight: 700;
             color: var(--primary-dark);
             margin-bottom: .75rem;
         }
 
         .intro-box p {
-            font-size: clamp(14px, 2.5vw, 16px);
+            font-size: clamp(15px, 2.5vw, 17px);
             color: #475569;
             line-height: 1.8;
         }
@@ -157,13 +160,13 @@
         .scale-guide {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: .5rem;
-            margin-top: 1.25rem;
+            gap: clamp(0.375rem, 1.5vw, 0.75rem);
+            margin-top: 1.5rem;
         }
 
         .scale-item {
             background: #fff;
-            padding: .75rem .4rem;
+            padding: clamp(0.6rem, 1.5vw, 1rem) clamp(0.2rem, 0.8vw, 0.5rem);
             border-radius: .75rem;
             border: 2px solid #e5e7eb;
             text-align: center;
@@ -177,13 +180,13 @@
         }
 
         .scale-item .sv {
-            font-size: clamp(20px, 4vw, 24px);
+            font-size: clamp(22px, 4vw, 26px);
             font-weight: 800;
             color: var(--primary);
         }
 
         .scale-item .sl {
-            font-size: clamp(11px, 1.8vw, 14px);
+            font-size: clamp(12px, 1.8vw, 15px);
             color: #64748b;
             font-weight: 600;
             line-height: 1.3;
@@ -201,7 +204,7 @@
         }
 
         .info-title {
-            font-size: clamp(15px, 2.8vw, 19px);
+            font-size: clamp(16px, 2.8vw, 20px);
             font-weight: 800;
             color: var(--primary-dark);
         }
@@ -210,7 +213,7 @@
             display: flex;
             align-items: flex-start;
             gap: .6rem;
-            font-size: clamp(14px, 2.5vw, 17px);
+            font-size: clamp(15px, 2.5vw, 18px);
             color: #374151;
             line-height: 1.6;
         }
@@ -235,7 +238,7 @@
             padding: .6rem .5rem;
             border-radius: .6rem;
             text-align: center;
-            font-size: clamp(10px, 1.5vw, 12px);
+            font-size: clamp(11px, 1.8vw, 14px);
             font-weight: 700;
             line-height: 1.3;
         }
@@ -315,7 +318,7 @@
             gap: .6rem;
             align-items: center;
             cursor: pointer;
-            font-size: clamp(14px, 2.2vw, 16px);
+            font-size: 15px;
             color: #475569;
         }
 
@@ -347,8 +350,8 @@
             margin-bottom: .5rem;
         }
 
-        .progress-label { font-weight: 700; color: #374151; font-size: clamp(14px, 2.5vw, 16px); }
-        .progress-pct { font-weight: 800; color: var(--primary); font-size: clamp(16px, 3vw, 20px); }
+        .progress-label { font-weight: 700; color: #374151; font-size: clamp(15px, 2.5vw, 17px); }
+        .progress-pct { font-weight: 800; color: var(--primary); font-size: clamp(17px, 3vw, 21px); }
 
         .progress-track {
             height: 10px;
@@ -404,17 +407,17 @@
         }
 
         .q-text {
-            font-size: clamp(16px, 3vw, 18px);
+            font-size: clamp(17px, 3vw, 19px);
             font-weight: 600;
             color: #1f2937;
             line-height: 1.6;
             flex: 1;
         }
 
-        .q-answers { display: grid; grid-template-columns: repeat(5, 1fr); gap: .4rem; }
+        .q-answers { display: grid; grid-template-columns: repeat(5, 1fr); gap: clamp(0.25rem, 1vw, 0.5rem); }
 
         .q-ans {
-            padding: .7rem .3rem;
+            padding: clamp(0.6rem, 1.5vw, 0.875rem) clamp(0.2rem, 0.8vw, 0.5rem);
             border: 2px solid #e5e7eb;
             border-radius: .7rem;
             background: #fff;
@@ -435,8 +438,8 @@
             box-shadow: var(--shadow-md);
         }
 
-        .q-ans .as { font-size: clamp(16px, 4vw, 20px); font-weight: 800; }
-        .q-ans .al { font-size: clamp(10px, 2.2vw, 13px); font-weight: 600; opacity: .85; line-height: 1.2; margin-top: .15rem; white-space: pre-line; }
+        .q-ans .as { font-size: clamp(17px, 4vw, 21px); font-weight: 800; }
+        .q-ans .al { font-size: clamp(11px, 2.2vw, 14px); font-weight: 600; opacity: .85; line-height: 1.2; margin-top: .15rem; white-space: pre-line; }
 
         /* Buttons */
         .btn {
@@ -819,63 +822,63 @@
 
             .intro-box p br { display: none; }
 
-            .scale-guide { gap: .3rem; }
-            .scale-item { padding: .55rem .15rem; }
-            .scale-item .sv { font-size: clamp(16px, 4vw, 20px); }
+            .scale-guide { gap: 0.375rem; }
+            .scale-item { padding: 0.75rem 0.25rem; }
+            .scale-item .sv { font-size: clamp(18px, 4vw, 22px); }
             .scale-item .sl {
                 font-size: 0;
                 color: transparent;
                 overflow: hidden;
                 line-height: 0;
             }
-            .scale-item:nth-child(1) .sl::after { content: "매우\A그렇다"; white-space: pre-line; font-size: clamp(9px, 2.2vw, 11px); display: block; color: #64748b; line-height: 1.3; }
-            .scale-item:nth-child(2) .sl::after { content: "자주\A그렇다"; white-space: pre-line; font-size: clamp(9px, 2.2vw, 11px); display: block; color: #64748b; line-height: 1.3; }
-            .scale-item:nth-child(3) .sl::after { content: "그저\A그렇다"; white-space: pre-line; font-size: clamp(9px, 2.2vw, 11px); display: block; color: #64748b; line-height: 1.3; }
-            .scale-item:nth-child(4) .sl::after { content: "별로\A아니다"; white-space: pre-line; font-size: clamp(9px, 2.2vw, 11px); display: block; color: #64748b; line-height: 1.3; }
-            .scale-item:nth-child(5) .sl::after { content: "거의\A아니다"; white-space: pre-line; font-size: clamp(9px, 2.2vw, 11px); display: block; color: #64748b; line-height: 1.3; }
+            .scale-item:nth-child(1) .sl::after { content: "매우\A그렇다"; white-space: pre-line; font-size: clamp(10px, 2.2vw, 13px); display: block; color: #64748b; line-height: 1.3; }
+            .scale-item:nth-child(2) .sl::after { content: "자주\A그렇다"; white-space: pre-line; font-size: clamp(10px, 2.2vw, 13px); display: block; color: #64748b; line-height: 1.3; }
+            .scale-item:nth-child(3) .sl::after { content: "그저\A그렇다"; white-space: pre-line; font-size: clamp(10px, 2.2vw, 13px); display: block; color: #64748b; line-height: 1.3; }
+            .scale-item:nth-child(4) .sl::after { content: "별로\A아니다"; white-space: pre-line; font-size: clamp(10px, 2.2vw, 13px); display: block; color: #64748b; line-height: 1.3; }
+            .scale-item:nth-child(5) .sl::after { content: "거의\A아니다"; white-space: pre-line; font-size: clamp(10px, 2.2vw, 13px); display: block; color: #64748b; line-height: 1.3; }
 
             .quadrant-preview { max-width: 300px; gap: .4rem; }
-            .qp-item { font-size: clamp(9px, 2vw, 11px); padding: .5rem .3rem; }
+            .qp-item { font-size: clamp(10px, 2.2vw, 13px); padding: .5rem .3rem; }
 
             .q-item { padding: 1rem; border-radius: 1rem; }
             .q-head { gap: .6rem; margin-bottom: .7rem; }
-            .q-num { min-width: 28px; height: 28px; font-size: 13px; border-radius: 7px; }
-            .q-text { font-size: clamp(14px, 3.2vw, 16px); }
+            .q-num { min-width: 2rem; height: 2rem; font-size: clamp(13px, 2.5vw, 15px); border-radius: 7px; }
+            .q-text { font-size: clamp(15px, 3vw, 18px); }
 
-            .q-answers { gap: .25rem; }
-            .q-ans { padding: .5rem .15rem; border-radius: .55rem; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-            .q-ans .as { font-size: clamp(13px, 3.5vw, 16px); }
-            .q-ans .al { font-size: clamp(8px, 2vw, 11px); text-align: center; }
+            .q-answers { gap: 0.375rem; }
+            .q-ans { padding: 0.75rem 0.25rem; border-radius: .55rem; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+            .q-ans .as { font-size: clamp(16px, 3.5vw, 20px); }
+            .q-ans .al { font-size: clamp(9px, 2.2vw, 13px); text-align: center; }
 
             .progress-wrap { padding: .7rem .85rem; margin-bottom: 1.25rem; }
 
-            .score-grid { gap: .35rem; margin: 1.25rem 0; }
-            .score-card { padding: .6rem .25rem; border-radius: .75rem; }
-            .score-card .sc-label { font-size: clamp(8px, 2vw, 11px); line-height: 1.2; margin-bottom: .2rem; }
-            .score-card .sc-val { font-size: clamp(18px, 4vw, 24px); }
+            .score-grid { gap: 0.375rem; margin: 1.25rem 0; }
+            .score-card { padding: 0.75rem 0.5rem; border-radius: .75rem; }
+            .score-card .sc-label { font-size: clamp(11px, 2.2vw, 14px); line-height: 1.2; margin-bottom: .2rem; }
+            .score-card .sc-val { font-size: clamp(18px, 3.5vw, 22px); }
 
-            .quad-badge { padding: .5rem 1rem; font-size: clamp(12px, 3vw, 18px); border-radius: 1rem; line-height: 1.4; }
+            .quad-badge { padding: .5rem 1rem; font-size: clamp(14px, 3vw, 20px); border-radius: 1rem; line-height: 1.4; }
 
             .chart-wrap { padding: 1rem; }
-            .chart-title { font-size: clamp(16px, 3.5vw, 20px); margin-bottom: .75rem; }
+            .chart-title { font-size: clamp(18px, 4vw, 22px); margin-bottom: .75rem; }
 
             .quad-selector { gap: .3rem; margin-bottom: 1.25rem; }
-            .quad-btn { padding: .55rem .25rem; font-size: clamp(12px, 2.8vw, 14px); border-radius: .6rem; }
-            .quad-btn .my-result-tag { font-size: 9px; padding: 0.05rem 0.3rem; }
-            .quad-btn .btn-score { font-size: 10px; }
+            .quad-btn { padding: 0.5rem 0.25rem; font-size: clamp(11px, 2vw, 14px); border-radius: .6rem; }
+            .quad-btn .my-result-tag { font-size: clamp(8px, 1.5vw, 10px); padding: 0.1rem 0.35rem; }
+            .quad-btn .btn-score { font-size: clamp(9px, 1.5vw, 11px); }
             .my-result-badge { font-size: clamp(12px, 2vw, 14px); padding: 0.4rem 1rem; }
 
             .detail-grid { grid-template-columns: 1fr; gap: .85rem; }
             .detail-card { padding: 1rem; }
-            .detail-card h3 { font-size: clamp(15px, 3.2vw, 18px); }
-            .detail-card li { font-size: clamp(13px, 2.6vw, 15px); padding-left: 1.4rem; }
+            .detail-card h3 { font-size: clamp(16px, 3.5vw, 20px); }
+            .detail-card li { font-size: clamp(14px, 2.5vw, 16px); padding-left: 1.4rem; }
 
-            .type-detail-name { font-size: clamp(22px, 5vw, 30px); }
-            .type-detail-sub { font-size: clamp(13px, 2.6vw, 16px); }
+            .type-detail-name { font-size: clamp(22px, 5vw, 28px); }
+            .type-detail-sub { font-size: clamp(13px, 2.5vw, 16px); }
 
-            .result-title { font-size: clamp(22px, 5vw, 30px); }
+            .result-title { font-size: clamp(22px, 5vw, 28px); }
 
-            .btn { padding: .75rem 1.25rem; font-size: clamp(14px, 3vw, 16px); }
+            .btn { padding: 0.8rem 1.2rem; font-size: clamp(14px, 2.5vw, 16px); }
 
             .actions {
                 margin-top: 1.75rem;
@@ -915,39 +918,42 @@
             .strategy-input { font-size: 16px; }
 
             .info-block { padding: 1rem; gap: .7rem; }
-            .info-row { font-size: clamp(13px, 2.6vw, 15px); }
+            .info-row { font-size: clamp(13px, 2.2vw, 16px); }
 
-            .complete-msg { font-size: clamp(14px, 2.8vw, 17px); }
+            .complete-msg { font-size: clamp(15px, 2.8vw, 18px); }
         }
 
         /* 소형 모바일 (480px 이하) */
         @media (max-width: 480px) {
-            body { padding: .75rem .25rem; }
-            .card { padding: 1rem; border-radius: 1rem; }
+            body { padding: .75rem .4rem; }
+            .card { padding: 1.2rem; border-radius: 1.2rem; }
 
-            .header h1 { font-size: clamp(24px, 7vw, 32px); }
-            .header .subtitle { font-size: clamp(13px, 3.2vw, 16px); }
-            .header { margin-bottom: 1.5rem; }
+            .header h1 { font-size: clamp(22px, 5.5vw, 26px); }
+            .header .subtitle { font-size: clamp(13px, 2.5vw, 15px); }
+            .header { margin-bottom: 1.2rem; }
 
-            .intro-box { padding: 1rem; border-radius: 1rem; }
+            .intro-box { padding: 1.2rem; border-radius: 1rem; }
 
-            .scale-item { padding: .5rem .1rem; }
-            .scale-item .sv { font-size: clamp(15px, 4.5vw, 18px); }
+            .scale-item { padding: 0.6rem 0.2rem; }
+            .scale-item .sv { font-size: clamp(16px, 3.8vw, 20px); }
+            .scale-item:nth-child(1) .sl::after, .scale-item:nth-child(2) .sl::after,
+            .scale-item:nth-child(3) .sl::after, .scale-item:nth-child(4) .sl::after,
+            .scale-item:nth-child(5) .sl::after { font-size: clamp(9px, 2vw, 12px); }
 
-            .q-item { padding: .85rem; }
-            .q-ans { min-height: 48px; padding: .45rem .1rem; }
-            .q-ans .as { font-size: clamp(12px, 3.2vw, 15px); }
-            .q-ans .al { font-size: clamp(7px, 1.8vw, 10px); }
-            .q-num { min-width: 26px; height: 26px; font-size: 12px; }
+            .q-item { padding: 1rem; }
+            .q-ans { min-height: 48px; padding: 0.6rem 0.2rem; }
+            .q-ans .as { font-size: clamp(14px, 3.5vw, 18px); }
+            .q-ans .al { font-size: clamp(9px, 2vw, 12px); }
+            .q-num { min-width: 1.75rem; height: 1.75rem; font-size: clamp(12px, 2.2vw, 14px); }
 
-            .score-card .sc-label { font-size: clamp(7px, 1.8vw, 10px); }
-            .score-card .sc-val { font-size: clamp(16px, 4vw, 20px); }
+            .score-card .sc-label { font-size: clamp(10px, 2vw, 13px); }
+            .score-card .sc-val { font-size: clamp(16px, 3.5vw, 20px); }
 
-            .quad-badge { font-size: clamp(11px, 3vw, 16px); padding: .45rem .85rem; }
+            .quad-badge { font-size: clamp(14px, 3.5vw, 18px); padding: .45rem .85rem; }
 
-            .quad-btn { font-size: clamp(11px, 2.5vw, 13px); padding: .45rem .2rem; }
-            .quad-btn .my-result-tag { font-size: 8px; padding: 0.05rem 0.25rem; margin-bottom: 0.15rem; }
-            .quad-btn .btn-score { font-size: 9px; }
+            .quad-btn { font-size: clamp(10px, 2vw, 13px); padding: 0.4rem 0.15rem; }
+            .quad-btn .my-result-tag { font-size: clamp(7px, 1.5vw, 9px); padding: 0.05rem 0.25rem; margin-bottom: 0.15rem; }
+            .quad-btn .btn-score { font-size: clamp(8px, 1.5vw, 10px); }
 
             .actions {
                 margin-left: -1rem;
@@ -969,32 +975,46 @@
                 flex: none;
             }
 
-            .actions .btn { min-width: 90px; padding: .65rem 1rem; font-size: clamp(13px, 3vw, 15px); }
+            .actions .btn { min-width: 90px; padding: 0.7rem 1rem; font-size: clamp(12px, 2.5vw, 15px); }
 
             .quadrant-preview { max-width: 260px; }
-            .qp-item { font-size: clamp(8px, 2.2vw, 10px); padding: .4rem .25rem; }
+            .qp-item { font-size: clamp(9px, 2vw, 12px); padding: .4rem .25rem; }
 
-            .detail-card li { padding-left: 1.25rem; }
+            .type-detail-name { font-size: clamp(20px, 5vw, 26px); }
+            .type-detail-sub { font-size: clamp(12px, 2.5vw, 15px); }
+            .detail-card h3 { font-size: clamp(16px, 3.5vw, 20px); }
+            .detail-card li { font-size: clamp(13px, 2.5vw, 15px); padding-left: 1.25rem; }
             .detail-card li::before { left: .25rem; }
+            .result-title { font-size: clamp(20px, 4.5vw, 24px); }
+            .info-row { font-size: clamp(12px, 2.2vw, 15px); }
+            .complete-msg { font-size: clamp(14px, 2.5vw, 16px); }
         }
 
         /* 초소형 모바일 (360px 이하) */
         @media (max-width: 360px) {
-            body { padding: .5rem .15rem; }
-            .card { padding: .85rem; border-radius: .85rem; }
+            body { padding: 0.5rem 0.3rem; }
+            .card { padding: 1rem; border-radius: 1rem; }
 
-            .header h1 { font-size: 22px; margin-bottom: .5rem; }
-            .header .subtitle { font-size: 12px; }
+            .header h1 { font-size: clamp(20px, 5.5vw, 24px); margin-bottom: .5rem; }
+            .header .subtitle { font-size: clamp(12px, 2.5vw, 14px); }
 
-            .scale-item .sv { font-size: 14px; }
+            .scale-item .sv { font-size: clamp(15px, 3.5vw, 18px); }
+            .scale-item:nth-child(1) .sl::after, .scale-item:nth-child(2) .sl::after,
+            .scale-item:nth-child(3) .sl::after, .scale-item:nth-child(4) .sl::after,
+            .scale-item:nth-child(5) .sl::after { font-size: clamp(8px, 1.8vw, 10px); }
 
             .q-ans { min-height: 44px; }
-            .q-ans .as { font-size: 11px; }
-            .q-ans .al { font-size: 7px; }
+            .q-ans .as { font-size: clamp(13px, 3vw, 16px); }
+            .q-ans .al { font-size: clamp(8px, 1.8vw, 10px); }
 
-            .score-card { padding: .5rem .2rem; }
+            .score-card { padding: 0.6rem 0.3rem; }
+            .score-card .sc-label { font-size: clamp(9px, 1.8vw, 11px); }
+            .score-card .sc-val { font-size: clamp(15px, 3.5vw, 18px); }
 
-            .quad-badge { font-size: 11px; padding: .4rem .7rem; }
+            .quad-badge { font-size: clamp(12px, 2.5vw, 14px); padding: .4rem .7rem; }
+            .quad-btn { font-size: clamp(9px, 1.8vw, 11px); }
+            .quad-btn .my-result-tag { font-size: 7px; }
+            .quad-btn .btn-score { font-size: 8px; }
 
             .actions {
                 margin-left: -.85rem;
