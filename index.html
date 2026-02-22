@@ -83,7 +83,7 @@
         .header { text-align: center; margin-bottom: 2.5rem; }
 
         .header h1 {
-            font-size: clamp(28px, 6vw, 44px);
+            font-size: clamp(32px, 6vw, 48px);
             font-weight: 900;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
@@ -94,7 +94,7 @@
         }
 
         .header .subtitle {
-            font-size: clamp(15px, 2.8vw, 19px);
+            font-size: clamp(16px, 3vw, 20px);
             color: #64748b;
             font-weight: 500;
         }
@@ -142,14 +142,14 @@
         }
 
         .intro-box h2 {
-            font-size: clamp(18px, 3.5vw, 22px);
+            font-size: clamp(20px, 4vw, 24px);
             font-weight: 700;
             color: var(--primary-dark);
             margin-bottom: .75rem;
         }
 
         .intro-box p {
-            font-size: clamp(14px, 2.4vw, 16px);
+            font-size: clamp(14px, 2.5vw, 16px);
             color: #475569;
             line-height: 1.8;
         }
@@ -177,13 +177,13 @@
         }
 
         .scale-item .sv {
-            font-size: clamp(18px, 4vw, 24px);
+            font-size: clamp(20px, 4vw, 24px);
             font-weight: 800;
             color: var(--primary);
         }
 
         .scale-item .sl {
-            font-size: clamp(10px, 1.6vw, 13px);
+            font-size: clamp(11px, 1.8vw, 14px);
             color: #64748b;
             font-weight: 600;
             line-height: 1.3;
@@ -201,7 +201,7 @@
         }
 
         .info-title {
-            font-size: clamp(14px, 2.6vw, 17px);
+            font-size: clamp(15px, 2.8vw, 19px);
             font-weight: 800;
             color: var(--primary-dark);
         }
@@ -210,7 +210,7 @@
             display: flex;
             align-items: flex-start;
             gap: .6rem;
-            font-size: clamp(13px, 2.3vw, 15px);
+            font-size: clamp(14px, 2.5vw, 17px);
             color: #374151;
             line-height: 1.6;
         }
@@ -301,7 +301,7 @@
 
         .radio-lbl { display: flex; align-items: center; gap: .4rem; cursor: pointer; }
         .radio-lbl input { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
-        .radio-lbl span { font-size: clamp(14px, 2.2vw, 16px); color: #334155; }
+        .radio-lbl span { font-size: 16px; color: #334155; }
 
         .consent-wrap {
             border: 2px solid #e5e7eb;
@@ -315,7 +315,7 @@
             gap: .6rem;
             align-items: center;
             cursor: pointer;
-            font-size: clamp(13px, 2vw, 15px);
+            font-size: clamp(14px, 2.2vw, 16px);
             color: #475569;
         }
 
@@ -347,8 +347,8 @@
             margin-bottom: .5rem;
         }
 
-        .progress-label { font-weight: 700; color: #374151; font-size: clamp(13px, 2.4vw, 15px); }
-        .progress-pct { font-weight: 800; color: var(--primary); font-size: clamp(15px, 2.8vw, 18px); }
+        .progress-label { font-weight: 700; color: #374151; font-size: clamp(14px, 2.5vw, 16px); }
+        .progress-pct { font-weight: 800; color: var(--primary); font-size: clamp(16px, 3vw, 20px); }
 
         .progress-track {
             height: 10px;
@@ -392,19 +392,19 @@
         .q-num {
             background: var(--primary-gradient);
             color: #fff;
-            min-width: 32px;
-            height: 32px;
+            min-width: clamp(28px, 6vw, 36px);
+            height: clamp(28px, 6vw, 36px);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 14px;
+            font-size: clamp(13px, 2.5vw, 16px);
             flex-shrink: 0;
         }
 
         .q-text {
-            font-size: clamp(15px, 2.8vw, 17px);
+            font-size: clamp(16px, 3vw, 18px);
             font-weight: 600;
             color: #1f2937;
             line-height: 1.6;
@@ -435,8 +435,8 @@
             box-shadow: var(--shadow-md);
         }
 
-        .q-ans .as { font-size: clamp(14px, 3.2vw, 18px); font-weight: 800; }
-        .q-ans .al { font-size: clamp(9px, 1.8vw, 12px); font-weight: 600; opacity: .85; line-height: 1.2; margin-top: .15rem; white-space: pre-line; }
+        .q-ans .as { font-size: clamp(16px, 4vw, 20px); font-weight: 800; }
+        .q-ans .al { font-size: clamp(10px, 2.2vw, 13px); font-weight: 600; opacity: .85; line-height: 1.2; margin-top: .15rem; white-space: pre-line; }
 
         /* Buttons */
         .btn {
@@ -445,7 +445,7 @@
             border: none;
             border-radius: .85rem;
             padding: .85rem 1.75rem;
-            font-size: clamp(15px, 2.8vw, 17px);
+            font-size: clamp(16px, 3vw, 18px);
             font-weight: 700;
             cursor: pointer;
             box-shadow: var(--shadow-md);
@@ -510,7 +510,7 @@
         .result-section.active { display: block; animation: fadeUp .55s ease-out; }
 
         .result-title {
-            font-size: clamp(26px, 5vw, 36px);
+            font-size: clamp(30px, 5.2vw, 38px);
             font-weight: 900;
             color: var(--primary-dark);
             text-align: center;
@@ -551,7 +551,7 @@
         }
 
         .score-card .sc-label {
-            font-size: clamp(10px, 1.8vw, 13px);
+            font-size: clamp(12px, 2vw, 14px);
             font-weight: 700;
             color: #64748b;
             margin-bottom: .3rem;
@@ -574,7 +574,7 @@
         }
 
         .chart-title {
-            font-size: clamp(18px, 3.5vw, 22px);
+            font-size: clamp(20px, 4vw, 24px);
             font-weight: 700;
             color: #1f2937;
             text-align: center;
@@ -592,7 +592,7 @@
             gap: .4rem;
             padding: .6rem 1.5rem;
             border-radius: 999px;
-            font-size: clamp(14px, 3vw, 22px);
+            font-size: clamp(18px, 3.5vw, 24px);
             font-weight: 800;
             color: #fff;
             box-shadow: var(--shadow-md);
@@ -611,13 +611,13 @@
         .type-detail-header { text-align: center; margin-bottom: 1.5rem; }
 
         .type-detail-name {
-            font-size: clamp(24px, 4.5vw, 34px);
+            font-size: clamp(28px, 5vw, 38px);
             font-weight: 900;
             margin-bottom: .3rem;
         }
 
         .type-detail-sub {
-            font-size: clamp(14px, 2.4vw, 17px);
+            font-size: clamp(15px, 2.5vw, 18px);
             color: #64748b;
             line-height: 1.7;
         }
@@ -638,7 +638,7 @@
             transition: all .25s;
             text-align: center;
             font-weight: 700;
-            font-size: clamp(11px, 1.8vw, 14px);
+            font-size: clamp(13px, 2vw, 16px);
             color: #475569;
             font-family: inherit;
             line-height: 1.3;
@@ -655,7 +655,7 @@
 
         .quad-btn .my-result-tag {
             display: block;
-            font-size: clamp(9px, 1.5vw, 11px);
+            font-size: clamp(9px, 1.5vw, 12px);
             font-weight: 800;
             color: #fff;
             background: var(--primary);
@@ -668,7 +668,7 @@
 
         .quad-btn .btn-score {
             display: block;
-            font-size: clamp(10px, 1.5vw, 12px);
+            font-size: clamp(10px, 1.5vw, 13px);
             font-weight: 600;
             opacity: 0.7;
             margin-top: 0.2rem;
@@ -687,7 +687,7 @@
             display: inline-block;
             background: var(--primary-gradient);
             color: white;
-            font-size: clamp(13px, 2.2vw, 15px);
+            font-size: clamp(14px, 2.2vw, 16px);
             font-weight: 700;
             padding: 0.5rem 1.25rem;
             border-radius: 999px;
@@ -710,7 +710,7 @@
         }
 
         .detail-card h3 {
-            font-size: clamp(16px, 3vw, 20px);
+            font-size: clamp(18px, 3.5vw, 22px);
             font-weight: 800;
             margin-bottom: .75rem;
             padding-bottom: .6rem;
@@ -721,7 +721,7 @@
 
         .detail-card li {
             padding: .4rem 0 .4rem 1.5rem;
-            font-size: clamp(13px, 2.3vw, 15px);
+            font-size: clamp(14px, 2.5vw, 17px);
             color: #475569;
             line-height: 1.6;
             position: relative;
@@ -749,7 +749,7 @@
 
         .strategy-item:hover { border-color: var(--primary-light); box-shadow: var(--shadow-sm); }
 
-        .strategy-num { font-weight: 800; color: var(--primary); margin-bottom: .4rem; font-size: clamp(14px, 2.5vw, 16px); }
+        .strategy-num { font-weight: 800; color: var(--primary); margin-bottom: .4rem; font-size: clamp(16px, 2.8vw, 18px); }
 
         .strategy-input {
             width: 100%;
@@ -784,7 +784,7 @@
         .complete-icon { font-size: clamp(56px, 12vw, 80px); margin-bottom: .75rem; text-align: center; }
 
         .complete-msg {
-            font-size: clamp(15px, 2.6vw, 18px);
+            font-size: clamp(16px, 2.8vw, 20px);
             color: #475569;
             line-height: 1.8;
             text-align: center;
