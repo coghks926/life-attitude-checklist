@@ -489,6 +489,8 @@
             z-index: 100;
         }
 
+        .result-section .card { padding-bottom: 6rem; }
+
         .result-section .actions {
             justify-content: space-between;
         }
@@ -638,6 +640,13 @@
             font-size: clamp(15px, 2.5vw, 18px);
             color: #64748b;
             line-height: 1.7;
+        }
+
+        .type-desc {
+            margin-top: .75rem;
+            font-size: clamp(15px, 2.6vw, 17px);
+            color: #64748b;
+            line-height: 1.8;
         }
 
         .quad-selector {
@@ -870,8 +879,8 @@
 
             .score-grid { gap: 0.375rem; margin: 1.25rem 0; }
             .score-card { padding: 0.75rem 0.5rem; border-radius: .75rem; }
-            .score-card .sc-label { font-size: clamp(14px, 2.6vw, 17px); line-height: 1.2; margin-bottom: .2rem; }
-            .score-card .sc-val { font-size: clamp(18px, 3.5vw, 24px); }
+            .score-card .sc-label { font-size: clamp(15px, 2.8vw, 18px); line-height: 1.3; margin-bottom: .25rem; }
+            .score-card .sc-val { font-size: clamp(20px, 4vw, 26px); }
 
             .quad-badge { padding: .5rem 1rem; font-size: clamp(14px, 3vw, 20px); border-radius: 1rem; line-height: 1.4; }
 
@@ -879,18 +888,21 @@
             .chart-title { font-size: clamp(18px, 4vw, 22px); margin-bottom: .75rem; }
 
             .quad-selector { gap: .3rem; margin-bottom: 1.25rem; }
-            .quad-btn { padding: 0.5rem 0.25rem; font-size: clamp(11px, 2vw, 14px); border-radius: .6rem; }
+            .quad-btn { padding: 0.5rem 0.25rem; font-size: clamp(12px, 2.2vw, 15px); border-radius: .6rem; }
             .quad-btn .my-result-tag { font-size: clamp(8px, 1.5vw, 10px); padding: 0.1rem 0.35rem; }
             .quad-btn .btn-score { font-size: clamp(9px, 1.5vw, 10px); }
             .my-result-badge { font-size: clamp(12px, 2vw, 14px); padding: 0.4rem 1rem; }
 
             .detail-grid { grid-template-columns: 1fr; gap: .85rem; }
             .detail-card { padding: 1rem; }
-            .detail-card h3 { font-size: clamp(18px, 3.5vw, 22px); }
-            .detail-card li { font-size: clamp(15px, 2.8vw, 18px); padding-left: 1.4rem; }
+            .detail-card h3 { font-size: clamp(19px, 3.8vw, 23px); }
+            .detail-card li { font-size: clamp(16px, 3vw, 19px); padding-left: 1.4rem; }
 
             .type-detail-name { font-size: clamp(22px, 5vw, 28px); }
-            .type-detail-sub { font-size: clamp(15px, 2.8vw, 18px); }
+            .type-detail-sub { font-size: clamp(16px, 3vw, 19px); }
+            .type-desc { font-size: clamp(16px, 3vw, 19px); line-height: 1.85; }
+
+            .result-section .card { padding-bottom: 7rem; }
 
             .result-title { font-size: clamp(22px, 5vw, 28px); }
 
@@ -962,8 +974,8 @@
             .q-ans .al { font-size: clamp(12px, 2.4vw, 15px); }
             .q-num { min-width: 1.75rem; height: 1.75rem; font-size: clamp(12px, 2.2vw, 14px); }
 
-            .score-card .sc-label { font-size: clamp(13px, 2.4vw, 16px); }
-            .score-card .sc-val { font-size: clamp(17px, 3.5vw, 22px); }
+            .score-card .sc-label { font-size: clamp(14px, 2.6vw, 17px); }
+            .score-card .sc-val { font-size: clamp(19px, 3.8vw, 24px); }
 
             .quad-badge { font-size: clamp(14px, 3.5vw, 18px); padding: .45rem .85rem; }
 
@@ -997,9 +1009,11 @@
             .qp-item { font-size: clamp(9px, 2vw, 12px); padding: .4rem .25rem; }
 
             .type-detail-name { font-size: clamp(20px, 5vw, 26px); }
-            .type-detail-sub { font-size: clamp(14px, 2.6vw, 17px); }
-            .detail-card h3 { font-size: clamp(17px, 3.5vw, 21px); }
-            .detail-card li { font-size: clamp(14px, 2.6vw, 17px); padding-left: 1.25rem; }
+            .type-detail-sub { font-size: clamp(15px, 2.8vw, 18px); }
+            .type-desc { font-size: clamp(15px, 2.8vw, 18px); }
+            .detail-card h3 { font-size: clamp(18px, 3.5vw, 21px); }
+            .detail-card li { font-size: clamp(15px, 2.8vw, 18px); padding-left: 1.25rem; }
+            .result-section .card { padding-bottom: 7.5rem; }
             .detail-card li::before { left: .25rem; }
             .result-title { font-size: clamp(20px, 4.5vw, 24px); }
             .info-row { font-size: clamp(14px, 2.6vw, 17px); }
@@ -1024,11 +1038,16 @@
             .q-ans .al { font-size: clamp(11px, 2.2vw, 13px); }
 
             .score-card { padding: 0.6rem 0.3rem; }
-            .score-card .sc-label { font-size: clamp(12px, 2.2vw, 14px); }
-            .score-card .sc-val { font-size: clamp(16px, 3.5vw, 20px); }
+            .score-card .sc-label { font-size: clamp(13px, 2.4vw, 16px); }
+            .score-card .sc-val { font-size: clamp(18px, 3.5vw, 22px); }
+
+            .type-desc { font-size: clamp(14px, 2.6vw, 17px); }
+            .detail-card h3 { font-size: clamp(17px, 3.5vw, 20px); }
+            .detail-card li { font-size: clamp(14px, 2.6vw, 17px); }
+            .result-section .card { padding-bottom: 8rem; }
 
             .quad-badge { font-size: clamp(12px, 2.5vw, 14px); padding: .4rem .7rem; }
-            .quad-btn { font-size: clamp(9px, 1.8vw, 11px); }
+            .quad-btn { font-size: clamp(10px, 2vw, 12px); }
             .quad-btn .my-result-tag { font-size: 7px; }
             .quad-btn .btn-score { font-size: 8px; }
 
@@ -1545,14 +1564,12 @@ function renderChart(s) {
     svg += `<line x1="20" y1="${cy}" x2="${W-20}" y2="${cy}" stroke="#334155" stroke-width="2"/>`;
     svg += `<line x1="${cx}" y1="20" x2="${cx}" y2="${H-20}" stroke="#334155" stroke-width="2"/>`;
 
-    [10,20,30,40,50,60].forEach(v => {
+    [20,40,60].forEach(v => {
         const d = v * scale;
-        if (v % 10 === 0) {
-            svg += `<text x="${cx+d}" y="${cy+16}" text-anchor="middle" font-size="10" fill="#94a3b8">${v}</text>`;
-            svg += `<text x="${cx-d}" y="${cy+16}" text-anchor="middle" font-size="10" fill="#94a3b8">${v}</text>`;
-            svg += `<text x="${cx+14}" y="${cy-d+4}" text-anchor="start" font-size="10" fill="#94a3b8">${v}</text>`;
-            svg += `<text x="${cx+14}" y="${cy+d+4}" text-anchor="start" font-size="10" fill="#94a3b8">${v}</text>`;
-        }
+        svg += `<text x="${cx+d}" y="${cy+18}" text-anchor="middle" font-size="12" fill="#94a3b8">${v}</text>`;
+        svg += `<text x="${cx-d}" y="${cy+18}" text-anchor="middle" font-size="12" fill="#94a3b8">${v}</text>`;
+        svg += `<text x="${cx+18}" y="${cy-d+5}" text-anchor="start" font-size="12" fill="#94a3b8">${v}</text>`;
+        svg += `<text x="${cx+18}" y="${cy+d+5}" text-anchor="start" font-size="12" fill="#94a3b8">${v}</text>`;
     });
 
     const diamond = `M ${pts.up.x} ${pts.up.y} L ${pts.right.x} ${pts.right.y} L ${pts.down.x} ${pts.down.y} L ${pts.left.x} ${pts.left.y} Z`;
@@ -1565,25 +1582,25 @@ function renderChart(s) {
         const anc = item.p.x < cx ? 'end' : (item.p.x > cx ? 'start' : 'middle');
         const ty = Math.abs(item.p.y - cy) < 5 ? item.p.y - 14 : item.p.y + offY;
         const tx = Math.abs(item.p.x - cx) < 5 ? item.p.x : item.p.x + offX;
-        svg += `<text x="${tx}" y="${ty}" text-anchor="${anc}" font-size="13" font-weight="800" fill="${item.c}">${item.s}</text>`;
+        svg += `<text x="${tx}" y="${ty}" text-anchor="${anc}" font-size="14" font-weight="800" fill="${item.c}">${item.s}</text>`;
     });
 
     svg += `<circle cx="${netX}" cy="${netY}" r="6" fill="#d97706" stroke="#fff" stroke-width="2" style="animation:pulseDot 1.5s ease infinite;transform-origin:${netX}px ${netY}px"/>`;
 
-    svg += `<text x="${cx}" y="16" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">You're OK</text>`;
-    svg += `<text x="${cx}" y="${H-6}" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">You're Not OK</text>`;
-    svg += `<text x="${W-8}" y="${cy-8}" text-anchor="end" font-size="13" font-weight="700" fill="#334155">I'm OK</text>`;
-    svg += `<text x="12" y="${cy-8}" text-anchor="start" font-size="13" font-weight="700" fill="#334155">I'm Not OK</text>`;
+    svg += `<text x="${cx}" y="16" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">You're OK</text>`;
+    svg += `<text x="${cx}" y="${H-6}" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">You're Not OK</text>`;
+    svg += `<text x="${W-8}" y="${cy-8}" text-anchor="end" font-size="14" font-weight="700" fill="#334155">I'm OK</text>`;
+    svg += `<text x="12" y="${cy-8}" text-anchor="start" font-size="14" font-weight="700" fill="#334155">I'm Not OK</text>`;
 
-    svg += `<text x="${cx}" y="30" text-anchor="middle" font-size="11" fill="#64748b">②</text>`;
-    svg += `<text x="${cx}" y="${H-18}" text-anchor="middle" font-size="11" fill="#64748b">①</text>`;
-    svg += `<text x="${W-12}" y="${cy+4}" text-anchor="end" font-size="11" fill="#64748b">③</text>`;
-    svg += `<text x="16" y="${cy+4}" text-anchor="start" font-size="11" fill="#64748b">④</text>`;
+    svg += `<text x="${cx}" y="30" text-anchor="middle" font-size="12" fill="#64748b">②</text>`;
+    svg += `<text x="${cx}" y="${H-18}" text-anchor="middle" font-size="12" fill="#64748b">①</text>`;
+    svg += `<text x="${W-12}" y="${cy+4}" text-anchor="end" font-size="12" fill="#64748b">③</text>`;
+    svg += `<text x="16" y="${cy+4}" text-anchor="start" font-size="12" fill="#64748b">④</text>`;
 
-    svg += `<text x="${cx+100}" y="52" text-anchor="middle" font-size="10" fill="#10b981" font-weight="600">협력형</text>`;
-    svg += `<text x="${cx-100}" y="52" text-anchor="middle" font-size="10" fill="#3b82f6" font-weight="600">위축형</text>`;
-    svg += `<text x="${cx+100}" y="${H-40}" text-anchor="middle" font-size="10" fill="#ef4444" font-weight="600">지배형</text>`;
-    svg += `<text x="${cx-100}" y="${H-40}" text-anchor="middle" font-size="10" fill="#6b7280" font-weight="600">무력형</text>`;
+    svg += `<text x="${cx+100}" y="52" text-anchor="middle" font-size="13" font-weight="600" fill="#10b981">협력형</text>`;
+    svg += `<text x="${cx-100}" y="52" text-anchor="middle" font-size="13" font-weight="600" fill="#3b82f6">위축형</text>`;
+    svg += `<text x="${cx+100}" y="${H-40}" text-anchor="middle" font-size="13" font-weight="600" fill="#ef4444">지배형</text>`;
+    svg += `<text x="${cx-100}" y="${H-40}" text-anchor="middle" font-size="13" font-weight="600" fill="#6b7280">무력형</text>`;
 
     svg += '</svg>';
     document.getElementById('chartArea').innerHTML = svg;
@@ -1618,7 +1635,7 @@ function renderTypeDetail() {
         ${myBadge}
         <div class="type-detail-name" style="color:${qi.color};">${qi.name}</div>
         <div class="type-detail-sub"><b>${qi.eng}</b><br>"${qi.slogan}"</div>
-        <p style="margin-top:.75rem; font-size:clamp(13px,2.3vw,15px); color:#64748b; line-height:1.7;">${qi.desc}</p>
+        <p class="type-desc">${qi.desc}</p>
     `;
 
     document.getElementById('typeContent').innerHTML = `
