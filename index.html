@@ -573,12 +573,13 @@
         }
 
         .score-card .sc-label {
-            font-size: clamp(14px, 2.4vw, 16px);
+            font-size: clamp(13px, 2.2vw, 15px);
             font-weight: 700;
             color: #64748b;
             margin-bottom: .3rem;
-            line-height: 1.3;
+            line-height: 1.35;
         }
+        .score-card .sc-label .sc-eng { font-size: clamp(10px, 1.8vw, 12px); font-weight: 600; opacity: .9; }
 
         .score-card .sc-val {
             font-size: clamp(18px, 3.2vw, 24px);
@@ -596,13 +597,69 @@
             overflow: visible;
         }
 
+        .chart-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
         .chart-title {
             font-size: clamp(20px, 4vw, 24px);
             font-weight: 700;
             color: #1f2937;
             text-align: center;
-            margin-bottom: 1rem;
         }
+        .chart-zoom-btn {
+            padding: .4rem .85rem;
+            font-size: clamp(13px, 2.2vw, 15px);
+            font-weight: 600;
+            color: var(--primary-dark);
+            background: var(--primary-bg);
+            border: 2px solid var(--primary-border);
+            border-radius: .6rem;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all .25s;
+        }
+        .chart-zoom-btn:hover { background: rgba(217,119,6,0.15); }
+        .chart-zoom-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .chart-zoom-modal.open { display: flex; }
+        .chart-zoom-content {
+            background: #fff;
+            border-radius: 1.25rem;
+            padding: 2rem;
+            max-width: 95vw;
+            max-height: 95vh;
+            overflow: auto;
+            position: relative;
+        }
+        .chart-zoom-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: #f3f4f6;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .chart-zoom-close:hover { background: #e5e7eb; }
+        #chartZoomArea { min-width: 400px; }
+        #chartZoomArea svg { width: 100%; max-width: 560px; height: auto; }
 
         .chart-svg-wrap { max-width: 560px; margin: 0 auto; overflow: visible; }
         .chart-svg-wrap svg { width: 100%; height: auto; overflow: visible; }
@@ -610,12 +667,12 @@
         /* Quadrant badge */
         .quad-badge {
             display: inline-flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: .4rem;
-            padding: .6rem 1.5rem;
+            gap: .15rem;
+            padding: .75rem 1.75rem;
             border-radius: 999px;
-            font-size: clamp(18px, 3.5vw, 24px);
             font-weight: 800;
             color: #fff;
             box-shadow: var(--shadow-md);
@@ -624,6 +681,8 @@
             flex-wrap: wrap;
             max-width: 100%;
         }
+        .quad-badge .qb-name { font-size: clamp(20px, 4vw, 26px); line-height: 1.2; }
+        .quad-badge .qb-eng { font-size: clamp(13px, 2.2vw, 16px); opacity: .9; font-weight: 600; }
 
         .quad-badge.qb-iu { background: linear-gradient(135deg, #10b981, #059669); }
         .quad-badge.qb-in { background: linear-gradient(135deg, #ef4444, #dc2626); }
@@ -655,23 +714,23 @@
         .quad-selector {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: .4rem;
+            gap: .6rem;
             margin-bottom: 1.5rem;
         }
 
         .quad-btn {
-            padding: .65rem .4rem;
+            padding: .85rem .6rem;
             border: 2px solid #e5e7eb;
-            border-radius: .7rem;
+            border-radius: .85rem;
             background: #fff;
             cursor: pointer;
             transition: all .25s;
             text-align: center;
             font-weight: 700;
-            font-size: clamp(13px, 2vw, 16px);
+            font-size: clamp(15px, 2.5vw, 18px);
             color: #475569;
             font-family: inherit;
-            line-height: 1.3;
+            line-height: 1.35;
         }
 
         .quad-btn:hover { transform: translateY(-2px); }
@@ -685,7 +744,7 @@
 
         .quad-btn .my-result-tag {
             display: block;
-            font-size: clamp(9px, 1.5vw, 11px);
+            font-size: clamp(10px, 1.6vw, 12px);
             font-weight: 800;
             color: #fff;
             background: var(--primary);
@@ -696,12 +755,14 @@
             letter-spacing: 0.02em;
         }
 
+        .quad-btn .quad-btn-name { display: block; font-size: clamp(15px, 2.5vw, 18px); margin-bottom: .1rem; }
+        .quad-btn .quad-btn-eng { display: block; font-size: clamp(10px, 1.6vw, 12px); opacity: .85; font-weight: 600; }
         .quad-btn .btn-score {
             display: block;
-            font-size: clamp(10px, 1.5vw, 12px);
+            font-size: clamp(11px, 1.8vw, 14px);
             font-weight: 600;
             opacity: 0.7;
-            margin-top: 0.2rem;
+            margin-top: 0.25rem;
         }
 
         .quad-btn.active .my-result-tag {
@@ -880,20 +941,26 @@
 
             .progress-wrap { padding: .7rem .85rem; margin-bottom: 1.25rem; }
 
-            .score-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin: 1.25rem 0; }
+            .score-grid { gap: 0.5rem; margin: 1.25rem 0; }
             .score-card { padding: 0.6rem 0.35rem; border-radius: .75rem; min-width: 0; }
-            .score-card .sc-label { font-size: clamp(15px, 2.8vw, 18px); line-height: 1.3; margin-bottom: .25rem; }
+            .score-card .sc-label { font-size: clamp(14px, 2.6vw, 17px); line-height: 1.3; margin-bottom: .25rem; }
+            .score-card .sc-label .sc-eng { font-size: clamp(10px, 1.8vw, 12px); }
             .score-card .sc-val { font-size: clamp(16px, 3vw, 20px); }
 
-            .quad-badge { padding: .5rem 1rem; font-size: clamp(14px, 3vw, 20px); border-radius: 1rem; line-height: 1.4; }
+            .quad-badge { padding: .6rem 1.25rem; }
+            .quad-badge .qb-name { font-size: clamp(18px, 3.5vw, 22px); }
+            .quad-badge .qb-eng { font-size: clamp(12px, 2vw, 14px); }
 
             .chart-wrap { padding: 1rem; }
-            .chart-title { font-size: clamp(18px, 4vw, 22px); margin-bottom: .75rem; }
+            .chart-title-row { margin-bottom: .75rem; }
+            .chart-title { font-size: clamp(18px, 4vw, 22px); }
 
-            .quad-selector { gap: .3rem; margin-bottom: 1.25rem; }
-            .quad-btn { padding: 0.5rem 0.25rem; font-size: clamp(12px, 2.2vw, 15px); border-radius: .6rem; }
-            .quad-btn .my-result-tag { font-size: clamp(8px, 1.5vw, 10px); padding: 0.1rem 0.35rem; }
-            .quad-btn .btn-score { font-size: clamp(9px, 1.5vw, 10px); }
+            .quad-selector { gap: .5rem; margin-bottom: 1.5rem; }
+            .quad-btn { padding: .75rem .4rem; border-radius: .75rem; }
+            .quad-btn .quad-btn-name { font-size: clamp(14px, 2.4vw, 17px); }
+            .quad-btn .quad-btn-eng { font-size: clamp(10px, 1.6vw, 12px); }
+            .quad-btn .my-result-tag { font-size: clamp(9px, 1.5vw, 11px); padding: 0.1rem 0.35rem; }
+            .quad-btn .btn-score { font-size: clamp(11px, 1.8vw, 13px); }
             .my-result-badge { font-size: clamp(12px, 2vw, 14px); padding: 0.4rem 1rem; }
 
             .detail-grid { grid-template-columns: 1fr; gap: .85rem; }
@@ -973,16 +1040,20 @@
             .q-ans .al { font-size: clamp(12px, 2.4vw, 15px); }
             .q-num { min-width: 1.75rem; height: 1.75rem; font-size: clamp(12px, 2.2vw, 14px); }
 
-            .score-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+            .score-grid { gap: 0.45rem; }
             .score-card { padding: 0.65rem 0.5rem; }
             .score-card .sc-label { font-size: clamp(15px, 2.8vw, 18px); }
             .score-card .sc-val { font-size: clamp(16px, 3vw, 20px); }
 
-            .quad-badge { font-size: clamp(14px, 3.5vw, 18px); padding: .45rem .85rem; }
+            .quad-badge { padding: .5rem 1rem; }
+            .quad-badge .qb-name { font-size: clamp(16px, 3vw, 19px); }
+            .quad-badge .qb-eng { font-size: clamp(11px, 1.8vw, 13px); }
 
-            .quad-btn { font-size: clamp(10px, 2vw, 13px); padding: 0.4rem 0.15rem; }
-            .quad-btn .my-result-tag { font-size: clamp(7px, 1.5vw, 9px); padding: 0.05rem 0.25rem; margin-bottom: 0.15rem; }
-            .quad-btn .btn-score { font-size: clamp(8px, 1.5vw, 10px); }
+            .quad-btn { padding: .65rem .35rem; }
+            .quad-btn .quad-btn-name { font-size: clamp(13px, 2.2vw, 16px); }
+            .quad-btn .quad-btn-eng { font-size: clamp(9px, 1.5vw, 11px); }
+            .quad-btn .my-result-tag { font-size: clamp(8px, 1.5vw, 10px); padding: 0.05rem 0.25rem; margin-bottom: 0.15rem; }
+            .quad-btn .btn-score { font-size: clamp(10px, 1.6vw, 12px); }
 
             .actions-sticky {
                 margin-left: -1rem;
@@ -1037,7 +1108,7 @@
             .q-ans .as { font-size: clamp(11px, 2.4vw, 14px); margin-bottom: 0.2rem; }
             .q-ans .al { font-size: clamp(11px, 2.2vw, 13px); }
 
-            .score-grid { grid-template-columns: repeat(2, 1fr); gap: 0.45rem; }
+            .score-grid { gap: 0.4rem; }
             .score-card { padding: 0.6rem 0.4rem; }
             .score-card .sc-label { font-size: clamp(14px, 2.6vw, 17px); }
             .score-card .sc-val { font-size: clamp(15px, 2.8vw, 19px); }
@@ -1046,10 +1117,14 @@
             .detail-card h3 { font-size: clamp(17px, 3.5vw, 20px); }
             .detail-card li { font-size: clamp(14px, 2.6vw, 17px); }
 
-            .quad-badge { font-size: clamp(12px, 2.5vw, 14px); padding: .4rem .7rem; }
-            .quad-btn { font-size: clamp(10px, 2vw, 12px); }
+            .quad-badge { padding: .45rem .85rem; }
+            .quad-badge .qb-name { font-size: clamp(15px, 2.8vw, 17px); }
+            .quad-badge .qb-eng { font-size: clamp(10px, 1.6vw, 12px); }
+            .quad-btn { padding: .6rem .3rem; }
+            .quad-btn .quad-btn-name { font-size: clamp(12px, 2vw, 14px); }
+            .quad-btn .quad-btn-eng { font-size: clamp(8px, 1.4vw, 10px); }
             .quad-btn .my-result-tag { font-size: 7px; }
-            .quad-btn .btn-score { font-size: 8px; }
+            .quad-btn .btn-score { font-size: 9px; }
 
             .actions-sticky {
                 margin-left: -.85rem;
@@ -1215,8 +1290,17 @@
                 <div class="score-grid" id="scoreGrid"></div>
 
                 <div class="chart-wrap">
-                    <div class="chart-title">인생태도 체크리스트 결과표</div>
+                    <div class="chart-title-row">
+                        <span class="chart-title">인생태도 체크리스트 결과표</span>
+                        <button type="button" class="chart-zoom-btn" onclick="openChartZoom()" title="확대해서 보기">🔍 확대</button>
+                    </div>
                     <div class="chart-svg-wrap" id="chartArea"></div>
+                </div>
+                <div id="chartZoomModal" class="chart-zoom-modal" onclick="closeChartZoom(event)">
+                    <div class="chart-zoom-content">
+                        <button type="button" class="chart-zoom-close" onclick="closeChartZoom()">✕</button>
+                        <div id="chartZoomArea"></div>
+                    </div>
                 </div>
 
                 <div class="actions-sticky">
@@ -1349,10 +1433,10 @@ const ansOpts = [
 ];
 
 const catLabels = {
-    1: { axis:"①", name:"You're Not OK", kor:"타인부정(U-)" },
-    2: { axis:"②", name:"You're OK",     kor:"타인긍정(U+)" },
-    3: { axis:"③", name:"I'm OK",        kor:"자기긍정(I+)" },
-    4: { axis:"④", name:"I'm Not OK",    kor:"자기부정(I-)" }
+    1: { axis:"①", name:"You're Not OK", kor:"타인 부정", eng:"(You're Not OK)" },
+    2: { axis:"②", name:"You're OK",     kor:"타인 긍정", eng:"(You're OK)" },
+    3: { axis:"③", name:"I'm OK",        kor:"자기 긍정", eng:"(I'm OK)" },
+    4: { axis:"④", name:"I'm Not OK",    kor:"자기 부정", eng:"(I'm Not OK)" }
 };
 
 const quadInfo = {
@@ -1512,13 +1596,13 @@ function showResult1() {
 
     const qi = quadInfo[dominantQuad];
     document.getElementById('quadBadge').innerHTML =
-        `<div class="quad-badge ${qi.badge}">${qi.name}<span style="opacity:.7;font-size:.8em;margin:0 .2em;">—</span>${qi.eng}</div>`;
+        `<div class="quad-badge ${qi.badge}"><span class="qb-name">${qi.name}</span><span class="qb-eng">(${qi.eng})</span></div>`;
 
     document.getElementById('scoreGrid').innerHTML = [1,2,3,4].map(c => {
         const maxCat = [1,2,3,4].reduce((a,b) => scores[a] >= scores[b] ? a : b, 1);
         const cl = catLabels[c];
         return `<div class="score-card ${c === maxCat ? 'hi' : ''}">
-            <div class="sc-label">${cl.axis}<br>${cl.kor}</div>
+            <div class="sc-label">${cl.axis}<br>${cl.kor}<br><span class="sc-eng">${cl.eng}</span></div>
             <div class="sc-val">${scores[c]}</div>
         </div>`;
     }).join('');
@@ -1606,6 +1690,21 @@ function renderChart(s) {
     document.getElementById('chartArea').innerHTML = svg;
 }
 
+function openChartZoom() {
+    const zoomEl = document.getElementById('chartZoomArea');
+    if (zoomEl) {
+        const mainChart = document.getElementById('chartArea');
+        zoomEl.innerHTML = mainChart ? mainChart.innerHTML : '';
+        document.getElementById('chartZoomModal').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+}
+function closeChartZoom(e) {
+    if (e && e.target !== e.currentTarget && !e.target.classList.contains('chart-zoom-close')) return;
+    document.getElementById('chartZoomModal').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
 function showResult2() {
     hideAll();
     document.getElementById('result2').classList.add('active');
@@ -1624,7 +1723,8 @@ function renderTypeDetail() {
         const myTag = isMyResult ? `<span class="my-result-tag">나의 결과</span>` : '';
         const qScore = quadCats[q].reduce((sum, c) => sum + scores[c], 0);
         const scoreTag = `<span class="btn-score">${qScore}점</span>`;
-        return `<button class="quad-btn ${active ? 'active ' + qi.badge : ''} ${isMyResult ? 'my-result' : ''}" onclick="selectQuad('${q}')" style="${!active && isMyResult ? `border-color:${qi.color};` : ''}">${myTag}${qi.name}${scoreTag}</button>`;
+        const nameBlock = `<span class="quad-btn-name">${qi.name}</span><span class="quad-btn-eng">(${qi.eng})</span>`;
+        return `<button class="quad-btn ${active ? 'active ' + qi.badge : ''} ${isMyResult ? 'my-result' : ''}" onclick="selectQuad('${q}')" style="${!active && isMyResult ? `border-color:${qi.color};` : ''}">${myTag}${nameBlock}${scoreTag}</button>`;
     }).join('');
 
     const qi = quadInfo[selectedQuad];
