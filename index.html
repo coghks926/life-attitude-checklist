@@ -479,6 +479,14 @@
             justify-content: center;
             margin-top: clamp(2.5rem, 5vw, 3.5rem);
             flex-wrap: wrap;
+        }
+
+        .actions-sticky {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: clamp(2.5rem, 5vw, 3.5rem);
+            flex-wrap: wrap;
             position: sticky;
             bottom: 1rem;
             background: rgba(255,255,255,0.95);
@@ -489,14 +497,8 @@
             z-index: 100;
         }
 
-        .result-section .card { padding-bottom: 6rem; }
-
-        .result-section .actions {
-            justify-content: space-between;
-        }
-
-        .result-section .actions .btn-sec { margin-right: auto; }
-        .result-section .actions .btn:not(.btn-sec) { margin-left: auto; }
+        .actions-sticky .btn-sec { margin-right: auto; }
+        .actions-sticky .btn:not(.btn-sec) { margin-left: auto; }
 
         #introSection .actions,
         #userInfoSection .actions {
@@ -902,13 +904,11 @@
             .type-detail-sub { font-size: clamp(16px, 3vw, 19px); }
             .type-desc { font-size: clamp(16px, 3vw, 19px); line-height: 1.85; }
 
-            .result-section .card { padding-bottom: 7rem; }
-
             .result-title { font-size: clamp(22px, 5vw, 28px); }
 
             .btn { padding: 0.8rem 1.2rem; font-size: clamp(14px, 2.5vw, 16px); }
 
-            .actions {
+            .actions-sticky {
                 margin-top: 1.75rem;
                 flex-direction: row;
                 justify-content: space-between;
@@ -938,9 +938,7 @@
                 flex: none;
             }
 
-            .actions .btn { flex: 0 1 auto; min-width: 100px; justify-content: center; }
-            .actions .btn-sec { margin-right: auto; }
-            .actions .btn:not(.btn-sec) { margin-left: auto; }
+            .actions-sticky .btn { flex: 0 1 auto; min-width: 100px; justify-content: center; }
 
             .strategy-item { padding: 1rem; }
             .strategy-input { font-size: 16px; }
@@ -983,7 +981,7 @@
             .quad-btn .my-result-tag { font-size: clamp(7px, 1.5vw, 9px); padding: 0.05rem 0.25rem; margin-bottom: 0.15rem; }
             .quad-btn .btn-score { font-size: clamp(8px, 1.5vw, 10px); }
 
-            .actions {
+            .actions-sticky {
                 margin-left: -1rem;
                 margin-right: -1rem;
                 margin-bottom: -1rem;
@@ -1003,7 +1001,7 @@
                 flex: none;
             }
 
-            .actions .btn { min-width: 90px; padding: 0.7rem 1rem; font-size: clamp(12px, 2.5vw, 15px); }
+            .actions-sticky .btn { min-width: 90px; padding: 0.7rem 1rem; font-size: clamp(12px, 2.5vw, 15px); }
 
             .quadrant-preview { max-width: 260px; }
             .qp-item { font-size: clamp(9px, 2vw, 12px); padding: .4rem .25rem; }
@@ -1013,7 +1011,6 @@
             .type-desc { font-size: clamp(15px, 2.8vw, 18px); }
             .detail-card h3 { font-size: clamp(18px, 3.5vw, 21px); }
             .detail-card li { font-size: clamp(15px, 2.8vw, 18px); padding-left: 1.25rem; }
-            .result-section .card { padding-bottom: 7.5rem; }
             .detail-card li::before { left: .25rem; }
             .result-title { font-size: clamp(20px, 4.5vw, 24px); }
             .info-row { font-size: clamp(14px, 2.6vw, 17px); }
@@ -1044,14 +1041,13 @@
             .type-desc { font-size: clamp(14px, 2.6vw, 17px); }
             .detail-card h3 { font-size: clamp(17px, 3.5vw, 20px); }
             .detail-card li { font-size: clamp(14px, 2.6vw, 17px); }
-            .result-section .card { padding-bottom: 8rem; }
 
             .quad-badge { font-size: clamp(12px, 2.5vw, 14px); padding: .4rem .7rem; }
             .quad-btn { font-size: clamp(10px, 2vw, 12px); }
             .quad-btn .my-result-tag { font-size: 7px; }
             .quad-btn .btn-score { font-size: 8px; }
 
-            .actions {
+            .actions-sticky {
                 margin-left: -.85rem;
                 margin-right: -.85rem;
                 margin-bottom: -.85rem;
@@ -1074,7 +1070,7 @@
                 flex: none;
             }
 
-            .actions .btn { min-width: 80px; padding: .6rem .85rem; font-size: 13px; }
+            .actions-sticky .btn { min-width: 80px; padding: .6rem .85rem; font-size: 13px; }
 
             .btn { border-radius: .65rem; }
         }
@@ -1199,7 +1195,7 @@
 
             <div class="q-list" id="qList"></div>
 
-            <div class="actions">
+            <div class="actions-sticky">
                 <button class="btn btn-sec" onclick="backToUserInfo()">← 이전</button>
                 <button class="btn" id="resultBtn" onclick="showResult1()" disabled>결과 보기 →</button>
             </div>
@@ -1219,7 +1215,7 @@
                     <div class="chart-svg-wrap" id="chartArea"></div>
                 </div>
 
-                <div class="actions">
+                <div class="actions-sticky">
                     <button class="btn btn-sec" onclick="backToTest()">← 검사로 돌아가기</button>
                     <button class="btn" onclick="showResult2()">상세 보기 →</button>
                 </div>
@@ -1236,7 +1232,7 @@
                 <div class="type-detail-header" id="typeHeader"></div>
                 <div class="detail-grid" id="typeContent"></div>
 
-                <div class="actions">
+                <div class="actions-sticky">
                     <button class="btn btn-sec" onclick="showResult1()">← 이전</button>
                     <button class="btn" onclick="showResult3()">실천 방안 →</button>
                 </div>
@@ -1257,7 +1253,7 @@
                     <button class="btn btn-sec" onclick="addStrategy()" style="margin-top:1rem; width:100%; justify-content:center;">+ 방안 추가하기</button>
                 </div>
 
-                <div class="actions">
+                <div class="actions-sticky">
                     <button class="btn btn-sec" onclick="showResult2()">← 이전</button>
                     <button class="btn" onclick="showResult4()">제출하기 →</button>
                 </div>
