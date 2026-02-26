@@ -578,8 +578,9 @@
             color: #64748b;
             margin-bottom: .3rem;
             line-height: 1.35;
+            text-align: center;
         }
-        .score-card .sc-label .sc-eng { font-size: clamp(9px, 1.6vw, 11px); font-weight: 600; opacity: .9; white-space: nowrap; }
+        .score-card .sc-label .sc-eng { font-size: clamp(9px, 1.6vw, 11px); font-weight: 600; opacity: .9; white-space: nowrap; display: block; text-align: center; }
 
         .score-card .sc-val {
             font-size: clamp(18px, 3.2vw, 24px);
@@ -614,6 +615,8 @@
             user-select: none;
             -webkit-user-select: none;
             border-radius: 0.75rem;
+            border: 3px solid #dc2626;
+            box-sizing: border-box;
         }
         .chart-svg-wrap:active { cursor: grabbing; }
         .chart-svg-wrap .chart-zoom-inner {
