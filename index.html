@@ -527,7 +527,7 @@
 
         .result-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 1.5rem;
         }
 
         .result-title {
@@ -535,7 +535,7 @@
             font-weight: 900;
             color: var(--primary-dark);
             text-align: center;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             letter-spacing: 0.03em;
         }
 
@@ -545,7 +545,7 @@
             width: 72px;
             height: 4px;
             border-radius: 999px;
-            margin: 0.5rem auto 0;
+            margin: 0.35rem auto 0;
             background: var(--primary-gradient);
         }
 
@@ -579,7 +579,7 @@
             margin-bottom: .3rem;
             line-height: 1.35;
         }
-        .score-card .sc-label .sc-eng { font-size: clamp(10px, 1.8vw, 12px); font-weight: 600; opacity: .9; }
+        .score-card .sc-label .sc-eng { font-size: clamp(9px, 1.6vw, 11px); font-weight: 600; opacity: .9; white-space: nowrap; }
 
         .score-card .sc-val {
             font-size: clamp(18px, 3.2vw, 24px);
@@ -597,72 +597,30 @@
             overflow: visible;
         }
 
-        .chart-title-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
         .chart-title {
             font-size: clamp(20px, 4vw, 24px);
             font-weight: 700;
             color: #1f2937;
             text-align: center;
+            margin-bottom: 1rem;
         }
-        .chart-zoom-btn {
-            padding: .4rem .85rem;
-            font-size: clamp(13px, 2.2vw, 15px);
-            font-weight: 600;
-            color: var(--primary-dark);
-            background: var(--primary-bg);
-            border: 2px solid var(--primary-border);
-            border-radius: .6rem;
-            cursor: pointer;
-            font-family: inherit;
-            transition: all .25s;
-        }
-        .chart-zoom-btn:hover { background: rgba(217,119,6,0.15); }
-        .chart-zoom-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: rgba(0,0,0,0.6);
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-        .chart-zoom-modal.open { display: flex; }
-        .chart-zoom-content {
-            background: #fff;
-            border-radius: 1.25rem;
-            padding: 2rem;
-            max-width: 95vw;
-            max-height: 95vh;
-            overflow: auto;
-            position: relative;
-        }
-        .chart-zoom-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: 36px;
-            height: 36px;
-            border: none;
-            background: #f3f4f6;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            line-height: 1;
-        }
-        .chart-zoom-close:hover { background: #e5e7eb; }
-        #chartZoomArea { min-width: 400px; }
-        #chartZoomArea svg { width: 100%; max-width: 560px; height: auto; }
 
-        .chart-svg-wrap { max-width: 560px; margin: 0 auto; overflow: visible; }
-        .chart-svg-wrap svg { width: 100%; height: auto; overflow: visible; }
+        .chart-svg-wrap {
+            max-width: 560px;
+            margin: 0 auto;
+            overflow: hidden;
+            touch-action: none;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+            border-radius: 0.75rem;
+        }
+        .chart-svg-wrap:active { cursor: grabbing; }
+        .chart-svg-wrap .chart-zoom-inner {
+            transform-origin: 50% 50%;
+            will-change: transform;
+        }
+        .chart-svg-wrap svg { width: 100%; height: auto; display: block; }
 
         /* Quadrant badge */
         .quad-badge {
@@ -676,7 +634,7 @@
             font-weight: 800;
             color: #fff;
             box-shadow: var(--shadow-md);
-            margin: 1rem auto;
+            margin: 0.5rem auto;
             text-align: center;
             flex-wrap: wrap;
             max-width: 100%;
@@ -755,8 +713,7 @@
             letter-spacing: 0.02em;
         }
 
-        .quad-btn .quad-btn-name { display: block; font-size: clamp(15px, 2.5vw, 18px); margin-bottom: .1rem; }
-        .quad-btn .quad-btn-eng { display: block; font-size: clamp(10px, 1.6vw, 12px); opacity: .85; font-weight: 600; }
+        .quad-btn .quad-btn-name { display: block; font-size: clamp(15px, 2.5vw, 18px); }
         .quad-btn .btn-score {
             display: block;
             font-size: clamp(11px, 1.8vw, 14px);
@@ -944,7 +901,7 @@
             .score-grid { gap: 0.5rem; margin: 1.25rem 0; }
             .score-card { padding: 0.6rem 0.35rem; border-radius: .75rem; min-width: 0; }
             .score-card .sc-label { font-size: clamp(14px, 2.6vw, 17px); line-height: 1.3; margin-bottom: .25rem; }
-            .score-card .sc-label .sc-eng { font-size: clamp(10px, 1.8vw, 12px); }
+            .score-card .sc-label .sc-eng { font-size: clamp(9px, 1.6vw, 11px); white-space: nowrap; }
             .score-card .sc-val { font-size: clamp(16px, 3vw, 20px); }
 
             .quad-badge { padding: .6rem 1.25rem; }
@@ -952,13 +909,11 @@
             .quad-badge .qb-eng { font-size: clamp(12px, 2vw, 14px); }
 
             .chart-wrap { padding: 1rem; }
-            .chart-title-row { margin-bottom: .75rem; }
             .chart-title { font-size: clamp(18px, 4vw, 22px); }
 
             .quad-selector { gap: .5rem; margin-bottom: 1.5rem; }
             .quad-btn { padding: .75rem .4rem; border-radius: .75rem; }
             .quad-btn .quad-btn-name { font-size: clamp(14px, 2.4vw, 17px); }
-            .quad-btn .quad-btn-eng { font-size: clamp(10px, 1.6vw, 12px); }
             .quad-btn .my-result-tag { font-size: clamp(9px, 1.5vw, 11px); padding: 0.1rem 0.35rem; }
             .quad-btn .btn-score { font-size: clamp(11px, 1.8vw, 13px); }
             .my-result-badge { font-size: clamp(12px, 2vw, 14px); padding: 0.4rem 1rem; }
@@ -1042,7 +997,8 @@
 
             .score-grid { gap: 0.45rem; }
             .score-card { padding: 0.65rem 0.5rem; }
-            .score-card .sc-label { font-size: clamp(15px, 2.8vw, 18px); }
+            .score-card .sc-label { font-size: clamp(14px, 2.6vw, 17px); }
+            .score-card .sc-label .sc-eng { font-size: clamp(9px, 1.5vw, 11px); white-space: nowrap; }
             .score-card .sc-val { font-size: clamp(16px, 3vw, 20px); }
 
             .quad-badge { padding: .5rem 1rem; }
@@ -1051,7 +1007,6 @@
 
             .quad-btn { padding: .65rem .35rem; }
             .quad-btn .quad-btn-name { font-size: clamp(13px, 2.2vw, 16px); }
-            .quad-btn .quad-btn-eng { font-size: clamp(9px, 1.5vw, 11px); }
             .quad-btn .my-result-tag { font-size: clamp(8px, 1.5vw, 10px); padding: 0.05rem 0.25rem; margin-bottom: 0.15rem; }
             .quad-btn .btn-score { font-size: clamp(10px, 1.6vw, 12px); }
 
@@ -1110,7 +1065,8 @@
 
             .score-grid { gap: 0.4rem; }
             .score-card { padding: 0.6rem 0.4rem; }
-            .score-card .sc-label { font-size: clamp(14px, 2.6vw, 17px); }
+            .score-card .sc-label { font-size: clamp(13px, 2.4vw, 16px); }
+            .score-card .sc-label .sc-eng { font-size: clamp(8px, 1.4vw, 10px); white-space: nowrap; }
             .score-card .sc-val { font-size: clamp(15px, 2.8vw, 19px); }
 
             .type-desc { font-size: clamp(14px, 2.6vw, 17px); }
@@ -1122,7 +1078,6 @@
             .quad-badge .qb-eng { font-size: clamp(10px, 1.6vw, 12px); }
             .quad-btn { padding: .6rem .3rem; }
             .quad-btn .quad-btn-name { font-size: clamp(12px, 2vw, 14px); }
-            .quad-btn .quad-btn-eng { font-size: clamp(8px, 1.4vw, 10px); }
             .quad-btn .my-result-tag { font-size: 7px; }
             .quad-btn .btn-score { font-size: 9px; }
 
@@ -1290,17 +1245,8 @@
                 <div class="score-grid" id="scoreGrid"></div>
 
                 <div class="chart-wrap">
-                    <div class="chart-title-row">
-                        <span class="chart-title">인생태도 체크리스트 결과표</span>
-                        <button type="button" class="chart-zoom-btn" onclick="openChartZoom()" title="확대해서 보기">🔍 확대</button>
-                    </div>
+                    <div class="chart-title">인생태도 체크리스트 결과표</div>
                     <div class="chart-svg-wrap" id="chartArea"></div>
-                </div>
-                <div id="chartZoomModal" class="chart-zoom-modal" onclick="closeChartZoom(event)">
-                    <div class="chart-zoom-content">
-                        <button type="button" class="chart-zoom-close" onclick="closeChartZoom()">✕</button>
-                        <div id="chartZoomArea"></div>
-                    </div>
                 </div>
 
                 <div class="actions-sticky">
@@ -1687,22 +1633,82 @@ function renderChart(s) {
     svg += `<text x="${cx-100}" y="${H-36}" text-anchor="middle" font-size="15" font-weight="600" fill="#6b7280">무력형</text>`;
 
     svg += '</svg>';
-    document.getElementById('chartArea').innerHTML = svg;
+    const wrap = document.getElementById('chartArea');
+    const parent = wrap.parentNode;
+    const newWrap = document.createElement('div');
+    newWrap.className = wrap.className;
+    newWrap.id = wrap.id;
+    newWrap.innerHTML = `<div class="chart-zoom-inner">${svg}</div>`;
+    parent.replaceChild(newWrap, wrap);
+    initChartZoom(newWrap);
 }
 
-function openChartZoom() {
-    const zoomEl = document.getElementById('chartZoomArea');
-    if (zoomEl) {
-        const mainChart = document.getElementById('chartArea');
-        zoomEl.innerHTML = mainChart ? mainChart.innerHTML : '';
-        document.getElementById('chartZoomModal').classList.add('open');
-        document.body.style.overflow = 'hidden';
+function initChartZoom(wrapEl) {
+    if (!wrapEl) return;
+    const inner = wrapEl.querySelector('.chart-zoom-inner');
+    if (!inner) return;
+    let scale = 1, x = 0, y = 0;
+    let lastX = 0, lastY = 0, lastDist = 0, lastScale = 1;
+    let isPan = false, isPinch = false;
+
+    function apply() {
+        inner.style.transform = `translate(${x}px,${y}px) scale(${scale})`;
     }
-}
-function closeChartZoom(e) {
-    if (e && e.target !== e.currentTarget && !e.target.classList.contains('chart-zoom-close')) return;
-    document.getElementById('chartZoomModal').classList.remove('open');
-    document.body.style.overflow = '';
+
+    wrapEl.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 2) {
+            isPinch = true;
+            isPan = false;
+            lastDist = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+            lastScale = scale;
+        } else if (e.touches.length === 1) {
+            isPan = true;
+            isPinch = false;
+            lastX = e.touches[0].clientX - x;
+            lastY = e.touches[0].clientY - y;
+        }
+    }, { passive: true });
+
+    wrapEl.addEventListener('touchmove', (e) => {
+        if (isPinch && e.touches.length === 2) {
+            e.preventDefault();
+            const dist = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+            scale = Math.max(0.5, Math.min(4, lastScale * (dist / lastDist)));
+            apply();
+        } else if (isPan && e.touches.length === 1) {
+            x = e.touches[0].clientX - lastX;
+            y = e.touches[0].clientY - lastY;
+            apply();
+        }
+    }, { passive: false });
+
+    wrapEl.addEventListener('touchend', () => { isPan = false; isPinch = false; });
+
+    wrapEl.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.15 : 0.15;
+        scale = Math.max(0.5, Math.min(4, scale + delta));
+        apply();
+    }, { passive: false });
+
+    wrapEl.addEventListener('mousedown', (e) => {
+        if (e.button === 0) {
+            isPan = true;
+            lastX = e.clientX - x;
+            lastY = e.clientY - y;
+        }
+    });
+
+    wrapEl.addEventListener('mousemove', (e) => {
+        if (isPan) {
+            x = e.clientX - lastX;
+            y = e.clientY - lastY;
+            apply();
+        }
+    });
+
+    wrapEl.addEventListener('mouseup', () => { isPan = false; });
+    wrapEl.addEventListener('mouseleave', () => { isPan = false; });
 }
 
 function showResult2() {
@@ -1723,8 +1729,7 @@ function renderTypeDetail() {
         const myTag = isMyResult ? `<span class="my-result-tag">나의 결과</span>` : '';
         const qScore = quadCats[q].reduce((sum, c) => sum + scores[c], 0);
         const scoreTag = `<span class="btn-score">${qScore}점</span>`;
-        const nameBlock = `<span class="quad-btn-name">${qi.name}</span><span class="quad-btn-eng">(${qi.eng})</span>`;
-        return `<button class="quad-btn ${active ? 'active ' + qi.badge : ''} ${isMyResult ? 'my-result' : ''}" onclick="selectQuad('${q}')" style="${!active && isMyResult ? `border-color:${qi.color};` : ''}">${myTag}${nameBlock}${scoreTag}</button>`;
+        return `<button class="quad-btn ${active ? 'active ' + qi.badge : ''} ${isMyResult ? 'my-result' : ''}" onclick="selectQuad('${q}')" style="${!active && isMyResult ? `border-color:${qi.color};` : ''}">${myTag}<span class="quad-btn-name">${qi.name}</span>${scoreTag}</button>`;
     }).join('');
 
     const qi = quadInfo[selectedQuad];
