@@ -603,24 +603,26 @@
         }
 
         .chart-header {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
             margin-bottom: 1rem;
         }
         .chart-title {
+            grid-column: 2;
             font-size: clamp(20px, 4vw, 24px);
             font-weight: 700;
             color: #1f2937;
+            text-align: center;
+            justify-self: center;
         }
         .chart-reset-btn-wrap {
+            grid-column: 3;
             width: 32px;
-            min-width: 32px;
             height: 28px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-end;
         }
         .chart-reset-btn {
             display: none;
