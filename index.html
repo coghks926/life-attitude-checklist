@@ -561,7 +561,7 @@
             background: #fff;
             border: 2px solid #e5e7eb;
             border-radius: 1rem;
-            padding: .85rem .5rem;
+            padding: .85rem .25rem;
             text-align: center;
             transition: all .25s;
             overflow: hidden;
@@ -584,7 +584,7 @@
             overflow: hidden;
             min-width: 0;
         }
-        .score-card .sc-label .sc-eng { font-size: clamp(8px, 1.5vw, 10px); font-weight: 600; opacity: .9; white-space: nowrap; display: block; text-align: center; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+        .score-card .sc-label .sc-eng { font-size: clamp(6px, 1.1vw, 8px); font-weight: 600; opacity: .9; display: block; text-align: center; white-space: nowrap; }
 
         .score-card .sc-val {
             font-size: clamp(18px, 3.2vw, 24px);
@@ -602,12 +602,38 @@
             overflow: visible;
         }
 
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
         .chart-title {
             font-size: clamp(20px, 4vw, 24px);
             font-weight: 700;
             color: #1f2937;
             text-align: center;
-            margin-bottom: 1rem;
+        }
+        .chart-reset-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background: #fff;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .chart-reset-btn:hover {
+            background: #f3f4f6;
+            color: var(--primary);
+            border-color: var(--primary);
         }
 
         .chart-svg-wrap {
@@ -904,9 +930,9 @@
             .progress-wrap { padding: .7rem .85rem; margin-bottom: 1.25rem; }
 
             .score-grid { gap: 0.5rem; margin: 1.25rem 0; }
-            .score-card { padding: 0.6rem 0.35rem; border-radius: .75rem; min-width: 0; }
+            .score-card { padding: 0.6rem 0.2rem; border-radius: .75rem; min-width: 0; }
             .score-card .sc-label { font-size: clamp(14px, 2.6vw, 17px); line-height: 1.3; margin-bottom: .25rem; }
-            .score-card .sc-label .sc-eng { font-size: clamp(9px, 1.6vw, 11px); white-space: nowrap; }
+            .score-card .sc-label .sc-eng { font-size: clamp(6px, 1.1vw, 8px); white-space: nowrap; }
             .score-card .sc-val { font-size: clamp(16px, 3vw, 20px); }
 
             .quad-badge { padding: .6rem 1.25rem; }
@@ -1001,9 +1027,9 @@
             .q-num { min-width: 1.75rem; height: 1.75rem; font-size: clamp(12px, 2.2vw, 14px); }
 
             .score-grid { gap: 0.45rem; }
-            .score-card { padding: 0.65rem 0.5rem; }
+            .score-card { padding: 0.65rem 0.25rem; }
             .score-card .sc-label { font-size: clamp(14px, 2.6vw, 17px); }
-            .score-card .sc-label .sc-eng { font-size: clamp(9px, 1.5vw, 11px); white-space: nowrap; }
+            .score-card .sc-label .sc-eng { font-size: clamp(6px, 1.1vw, 8px); white-space: nowrap; }
             .score-card .sc-val { font-size: clamp(16px, 3vw, 20px); }
 
             .quad-badge { padding: .5rem 1rem; }
@@ -1069,9 +1095,9 @@
             .q-ans .al { font-size: clamp(11px, 2.2vw, 13px); }
 
             .score-grid { gap: 0.4rem; }
-            .score-card { padding: 0.6rem 0.4rem; }
+            .score-card { padding: 0.6rem 0.2rem; }
             .score-card .sc-label { font-size: clamp(13px, 2.4vw, 16px); }
-            .score-card .sc-label .sc-eng { font-size: clamp(8px, 1.4vw, 10px); white-space: nowrap; }
+            .score-card .sc-label .sc-eng { font-size: clamp(6px, 1vw, 8px); white-space: nowrap; }
             .score-card .sc-val { font-size: clamp(15px, 2.8vw, 19px); }
 
             .type-desc { font-size: clamp(14px, 2.6vw, 17px); }
@@ -1250,7 +1276,12 @@
                 <div class="score-grid" id="scoreGrid"></div>
 
                 <div class="chart-wrap">
-                    <div class="chart-title">인생태도 체크리스트 결과표</div>
+                    <div class="chart-header">
+                        <span class="chart-title">인생태도 체크리스트 결과표</span>
+                        <button type="button" class="chart-reset-btn" id="chartResetBtn" title="원래대로" aria-label="원래대로" style="display:none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                        </button>
+                    </div>
                     <div class="chart-svg-wrap" id="chartArea"></div>
                 </div>
 
@@ -1652,12 +1683,25 @@ function initChartZoom(wrapEl) {
     if (!wrapEl) return;
     const inner = wrapEl.querySelector('.chart-zoom-inner');
     if (!inner) return;
+    const resetBtn = wrapEl.closest('.chart-wrap')?.querySelector('#chartResetBtn');
     let scale = 1, x = 0, y = 0;
     let lastX = 0, lastY = 0, lastDist = 0, lastScale = 1;
     let isPan = false, isPinch = false;
 
+    function updateResetBtn() {
+        if (resetBtn) resetBtn.style.display = scale > 1.05 ? 'inline-flex' : 'none';
+    }
+
     function apply() {
         inner.style.transform = `translate(${x}px,${y}px) scale(${scale})`;
+        updateResetBtn();
+    }
+
+    if (resetBtn) {
+        resetBtn.onclick = () => {
+            scale = 1; x = 0; y = 0;
+            apply();
+        };
     }
 
     wrapEl.addEventListener('touchstart', (e) => {
