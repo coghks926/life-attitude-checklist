@@ -608,16 +608,22 @@
             justify-content: center;
             gap: 0.5rem;
             margin-bottom: 1rem;
-            flex-wrap: wrap;
         }
         .chart-title {
             font-size: clamp(20px, 4vw, 24px);
             font-weight: 700;
             color: #1f2937;
-            text-align: center;
+        }
+        .chart-reset-btn-wrap {
+            width: 32px;
+            min-width: 32px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .chart-reset-btn {
-            display: inline-flex;
+            display: none;
             align-items: center;
             justify-content: center;
             width: 28px;
@@ -634,6 +640,9 @@
             background: #f3f4f6;
             color: var(--primary);
             border-color: var(--primary);
+        }
+        .chart-reset-btn.visible {
+            display: inline-flex;
         }
 
         .chart-svg-wrap {
@@ -1278,9 +1287,11 @@
                 <div class="chart-wrap">
                     <div class="chart-header">
                         <span class="chart-title">인생태도 체크리스트 결과표</span>
-                        <button type="button" class="chart-reset-btn" id="chartResetBtn" title="원래대로" aria-label="원래대로" style="display:none">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-                        </button>
+                        <span class="chart-reset-btn-wrap">
+                            <button type="button" class="chart-reset-btn" id="chartResetBtn" title="원래대로" aria-label="원래대로">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                            </button>
+                        </span>
                     </div>
                     <div class="chart-svg-wrap" id="chartArea"></div>
                 </div>
@@ -1689,7 +1700,7 @@ function initChartZoom(wrapEl) {
     let isPan = false, isPinch = false;
 
     function updateResetBtn() {
-        if (resetBtn) resetBtn.style.display = scale > 1.05 ? 'inline-flex' : 'none';
+        if (resetBtn) resetBtn.classList.toggle('visible', scale > 1.05);
     }
 
     function apply() {
