@@ -1338,7 +1338,7 @@
 
                 <div class="actions-sticky">
                     <button class="btn btn-sec" onclick="showResult2()">← 이전</button>
-                    <button class="btn" onclick="showResult4()">제출하기 →</button>
+                    <button class="btn" onclick="showResult4()">다음 →</button>
                 </div>
             </div>
         </div>
@@ -1856,27 +1856,39 @@ function showResult4() {
     window.scrollTo({ top:0, behavior:'smooth' });
 }
 
-const SHEET_URL = '';
+// 구글 시트 저장 URL (배포 후 웹 앱 URL 입력)
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycby0zJ_rxz5snk82XNqUNpFcGtP3D1_a_h0lWScJLGGBIaMacbYB-ECFknRxnF2h4obqXg/exec';
 
 function sendToSheet() {
     if (!SHEET_URL) return;
     const qi = quadInfo[dominantQuad];
-    const strat = strategies.filter(s => s.trim()).join(' / ');
-    const data = {
-        gender: userInfo.gender,
-        age: userInfo.age,
-        score1: scores[1],
-        score2: scores[2],
-        score3: scores[3],
-        score4: scores[4],
-        resultType: qi.name + ' (' + qi.eng + ')',
-        strategy: strat
-    };
+    const strat = strategies
+        .map(s => (s || '').trim())
+        .filter(s => s !== '')
+        .map((s, i) => `${i + 1}. ${s}`)
+        .join('\n');
+    const resultTypeStr = qi ? qi.name + '\n(' + qi.eng + ')' : '';
+    const params = new URLSearchParams({
+        testType: 'lifeAttitude',
+        gender: userInfo.gender || '',
+        age: userInfo.age || '',
+        score1: String(scores[1] != null ? scores[1] : 0),
+        score2: String(scores[2] != null ? scores[2] : 0),
+        score3: String(scores[3] != null ? scores[3] : 0),
+        score4: String(scores[4] != null ? scores[4] : 0),
+        resultType: resultTypeStr,
+        resultColor: qi ? qi.color : '',
+        strategy: strat || '',
+        userAgent: navigator.userAgent || ''
+    });
     fetch(SHEET_URL, {
-        method:'POST', mode:'no-cors',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify(data)
-    }).then(() => console.log('저장 완료')).catch(e => console.error('저장 오류:', e));
+        method: 'POST',
+        mode: 'no-cors',
+        keepalive: true,
+        body: params
+    })
+    .then(() => console.log('데이터가 구글 시트에 저장되었습니다.'))
+    .catch(error => console.error('저장 오류:', error));
 }
 
 function resetAll() {
