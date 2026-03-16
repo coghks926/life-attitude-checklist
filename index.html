@@ -531,7 +531,7 @@
         }
 
         .result-title {
-            font-size: clamp(30px, 5.2vw, 38px);
+            font-size: clamp(32px, 5.4vw, 40px);
             font-weight: 900;
             color: var(--primary-dark);
             text-align: center;
@@ -584,7 +584,7 @@
             overflow: hidden;
             min-width: 0;
         }
-        .score-card .sc-label .sc-eng { font-size: clamp(6px, 1.1vw, 8px); font-weight: 600; opacity: .9; display: block; text-align: center; white-space: nowrap; }
+        .score-card .sc-label .sc-eng { font-size: clamp(6px, 1.1vw, 8px); font-weight: 600; opacity: .9; display: block; text-align: center; white-space: nowrap; line-height: 1.2; }
 
         .score-card .sc-val {
             font-size: clamp(18px, 3.2vw, 24px);
@@ -943,7 +943,7 @@
             .score-grid { gap: 0.5rem; margin: 1.25rem 0; }
             .score-card { padding: 0.6rem 0.2rem; border-radius: .75rem; min-width: 0; }
             .score-card .sc-label { font-size: clamp(14px, 2.6vw, 17px); line-height: 1.3; margin-bottom: .25rem; }
-            .score-card .sc-label .sc-eng { font-size: clamp(6px, 1.1vw, 8px); white-space: nowrap; }
+            .score-card .sc-label .sc-eng { font-size: clamp(6px, 1.1vw, 8px); white-space: normal; line-height: 1.2; }
             .score-card .sc-val { font-size: clamp(16px, 3vw, 20px); }
 
             .quad-badge { padding: .6rem 1.25rem; }
@@ -1040,7 +1040,7 @@
             .score-grid { gap: 0.45rem; }
             .score-card { padding: 0.65rem 0.25rem; }
             .score-card .sc-label { font-size: clamp(14px, 2.6vw, 17px); }
-            .score-card .sc-label .sc-eng { font-size: clamp(6px, 1.1vw, 8px); white-space: nowrap; }
+            .score-card .sc-label .sc-eng { font-size: clamp(6px, 1.1vw, 8px); white-space: normal; line-height: 1.2; }
             .score-card .sc-val { font-size: clamp(16px, 3vw, 20px); }
 
             .quad-badge { padding: .5rem 1rem; }
@@ -1108,7 +1108,7 @@
             .score-grid { gap: 0.4rem; }
             .score-card { padding: 0.6rem 0.2rem; }
             .score-card .sc-label { font-size: clamp(13px, 2.4vw, 16px); }
-            .score-card .sc-label .sc-eng { font-size: clamp(6px, 1vw, 8px); white-space: nowrap; }
+            .score-card .sc-label .sc-eng { font-size: clamp(6px, 1vw, 8px); white-space: normal; line-height: 1.2; }
             .score-card .sc-val { font-size: clamp(15px, 2.8vw, 19px); }
 
             .type-desc { font-size: clamp(14px, 2.6vw, 17px); }
@@ -1612,7 +1612,7 @@ function showResult1() {
     document.getElementById('scoreGrid').innerHTML = quads.map(q => {
         const qInfo = quadInfo[q];
         return `<div class="score-card ${q === maxQuad ? 'hi' : ''}">
-            <div class="sc-label">${qInfo.name}<br><span class="sc-eng">(${qInfo.eng})</span></div>
+            <div class="sc-label">${qInfo.name}<br><span class="sc-eng">${qInfo.eng}</span></div>
             <div class="sc-val">${formatArea(quadAreas[q])}</div>
         </div>`;
     }).join('');
