@@ -1619,15 +1619,12 @@ function showResult1() {
     document.getElementById('quadBadge').innerHTML =
         `<div class="quad-badge ${qi.badge}"><span class="qb-name">${qi.name}</span><span class="qb-eng">(${qi.eng})</span></div>`;
 
-    const quads = ['I+U+','I+U-','I-U+','I-U-'];
-    const quadAreas = calcQuadAreas(scores);
-    const maxQuad = quads.reduce((a, b) => quadAreas[a] >= quadAreas[b] ? a : b, quads[0]);
-
-    document.getElementById('scoreGrid').innerHTML = quads.map(q => {
-        const qInfo = quadInfo[q];
-        return `<div class="score-card ${q === maxQuad ? 'hi' : ''}">
-            <div class="sc-label">${qInfo.name}<br><span class="sc-eng">${splitEngTwoLines(qInfo.eng)}</span></div>
-            <div class="sc-val">${formatArea(quadAreas[q])}</div>
+    document.getElementById('scoreGrid').innerHTML = [1,2,3,4].map(c => {
+        const maxCat = [1,2,3,4].reduce((a,b) => scores[a] >= scores[b] ? a : b, 1);
+        const cl = catLabels[c];
+        return `<div class="score-card ${c === maxCat ? 'hi' : ''}">
+            <div class="sc-label">${cl.axis}<br>${cl.kor}<br><span class="sc-eng">${cl.eng}</span></div>
+            <div class="sc-val">${scores[c]}</div>
         </div>`;
     }).join('');
 
